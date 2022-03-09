@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="animals, cats, dogs">
+    <title>Animals</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" 
+      rel="stylesheet">
+  </head>
+
+  <body>
+    <header class="Header">
+      <div class="Logo">
+        <img src="img/icons/paw.svg">
+        <p>Pet breeds</p>
+      </div>
+      <p>by zoroMari</p>
+    </header>
+
+    <main class="Main">
+      <h1>Most popular breeds of our pets</h1>
+
+      <div class="Tabs">
+        <button class="Tablinks" onclick="openAnimals(event, 'Cats')" id="defaultOpen">Cats</button>
+        <button class="Tablinks" onclick="openAnimals(event, 'Dogs')">Dogs</button>
+        <button class="Tablinks" onclick="openAnimals(event, 'Rats')">Rats</button>
+      </div>
+
+      <section class="Tabcontent Cats" id="Cats">
+        <p>
+          Thinking about getting a cat but not sure which breed is right for you? We can help.
+        </p>
+      </section>
+
+      <section class="Tabcontent Dogs" id="Dogs">
+        <p>
+          Thinking about getting a cat but not sure which breed is right for you? We can help.
+        </p>
+      </section>
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script src="index.js"></script>
+  </body>
+</html>
