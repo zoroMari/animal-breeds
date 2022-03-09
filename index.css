@@ -1,0 +1,153 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, li, button {
+  list-style: none;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+img {
+  box-sizing: border-box;
+}
+
+a, h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+
+/* variables */
+:root {
+  --font-family: 'Montserrat', sans-serif;
+  --font-h1: 48px/59px var(--font-family);
+  --font-h2: 24px/29px var(--font-family);
+  
+  /* --font-body_large: 24px/160% var(--font-family);
+  --font-body_medium: 18px/185% var(--font-family); */
+  --font-body_regular: 16px/20px var(--font-family);
+  /* --font-body_small: 14px/185% var(--font-family); */
+
+  --font-logo: 24px/29px var(--font-family);
+  --font-lable: 12px/15px var(--font-family);
+  --font-button: 16px/20px var(--font-family);
+  --font-tabs: 24px/29px var(--font-family);
+
+  --color-white: #fff;
+  --color-black: #333;
+  --color-grey_light: #f5f5f5;
+  --color-main: #27AE60;
+  --color-main_light: #6FCF97;
+  --color-red: #EB5757;
+}
+
+
+
+/* header */
+body {
+  background-color: var(--color-grey_light);
+}
+
+.Header {
+  height: 80px;
+  background-color: var(--color-main_light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-white);
+  padding: 16px 40px;
+}
+
+.Header .Logo {
+  display: flex;
+  align-items: center;
+  font: var(--font-logo);
+  font-weight: 700;
+}
+
+.Header .Logo img {
+  margin-right: 16px;
+}
+
+.Header > p {
+  font: var(--font-body_regular);
+  font-weight: 700;
+}
+
+main {
+  max-width: 1600px;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font: var(--font-h1);
+  color: var(--color-black);
+}
+
+.Main h1 {
+  margin: 60px 0px 48px 0px;
+}
+
+.Main .Tabs {
+  width: auto;
+  height: auto;
+  display: flex;
+  padding: 0px 80px;
+  background-color: var(--color-white);
+  border-radius: 50px;
+}
+
+.Main .Tabs button {
+  font: var(--font-h2);
+  color: var(--color-black);
+  font-weight: 500;
+  padding: 24px 0px;
+}
+
+.Main .Tabs button:not(:last-child) {
+  margin-right: 141px;
+}
+
+.Tabs button.active {
+  color: var(--color-main);
+  font-weight: 700;
+  border-bottom: var(--color-main) solid 4px;
+}
+
+.Tabcontent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Tabcontent > p {
+  margin: 32px 0px;
+  color: var(--color-black);
+  font: var(--font-body_regular);
+}
+
