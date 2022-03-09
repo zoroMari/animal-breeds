@@ -139,8 +139,15 @@ h1 {
   border-bottom: var(--color-main) solid 4px;
 }
 
+.Tabcontent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .Tabcontent > p {
   margin: 32px 0px;
   color: var(--color-black);
   font: var(--font-body_regular);
 }
+
