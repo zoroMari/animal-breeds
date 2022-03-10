@@ -29,6 +29,12 @@ const globalEnergySelectValue = document.querySelector('.FilterOption-Energy .Se
 
 const buttonClean = document.querySelector('.Cats-Filter .Clear');
 
+const state = {
+  size: 'all',
+  coat: 'all',
+  energy: 'all',
+}
+
 function filterCat() {
 
   function handleChangeSelect(event) {
@@ -38,35 +44,59 @@ function filterCat() {
     selectValue.innerHTML = event.target.options[event.target.selectedIndex].text;
   }
 
-  function handleFilterBreeds(event) {
-    const selectedOption = event.target.options[event.target.selectedIndex];
+  function filterState(state) {
+    catBreeds.forEach((item) => {
+      const isSizeFilterCorrect = item.dataset.size === state.size || state.size === 'all';
+      const isCoatFilterCorrect = item.dataset.coat === state.coat || state.coat === 'all';
+      const isEnergyFilterCorrect = item.dataset.energy === state.energy || state.energy === 'all';
 
-    const name = event.target.name;
-
-    for (let breed of catBreeds) {
-
-      if (breed.dataset[name] !== selectedOption.value  
-        && selectedOption.value !== 'all') {
-          breed.style.display = "none";
-        } else {
-          breed.style.display = "flex";
-        }
-    }
+      if (isSizeFilterCorrect && isCoatFilterCorrect && isEnergyFilterCorrect) {
+        item.style.display = 'flex';
+      } else {
+        item.style.display = 'none';
+      }
+    });
   }
 
-  globalSizeSelect.addEventListener('change', handleChangeSelect);
-  globalSizeSelect.addEventListener('change', handleFilterBreeds);
+  function handleSizeFilterChange(event) {
+    const selectedOption = event.target.options[event.target.selectedIndex];
+    state.size = selectedOption.value;
+  
+    filterState(state);
+    handleChangeSelect(event)
+  }
 
-  globalCoatSelect.addEventListener('change', handleChangeSelect);
-  globalCoatSelect.addEventListener('change', handleFilterBreeds);
+  function handleCoatFilterChange(event) {
+    const selectedOption = event.target.options[event.target.selectedIndex];
+    state.coat = selectedOption.value;
+  
+    filterState(state);
+    handleChangeSelect(event)
+  }
 
-  globalEnergySelect.addEventListener('change', handleChangeSelect);
-  globalEnergySelect.addEventListener('change', handleFilterBreeds);
+  function handleEnergyFilterChange(event) {
+    const selectedOption = event.target.options[event.target.selectedIndex];
+    state.energy = selectedOption.value;
+  
+    filterState(state);
+    handleChangeSelect(event)
+  }
+
+  globalSizeSelect.addEventListener('change', handleSizeFilterChange);
+
+  globalCoatSelect.addEventListener('change', handleCoatFilterChange);
+
+  globalEnergySelect.addEventListener('change', handleEnergyFilterChange);
+
 
   buttonClean.addEventListener('click', function(e) {
     globalSizeSelect.value = 'all';
     globalCoatSelect.value = 'all';
     globalEnergySelect.value = 'all';
+
+    state.size = 'all sizes';
+    state.coat = 'all coat';
+    state. energy = 'all energy';
 
     globalSizeSelectValue.innerHTML = 'All sizes';
     globalCoatSelectValue.innerHTML = 'All coat';
