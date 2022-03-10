@@ -18,16 +18,18 @@ document.getElementById('defaultOpen').click();
 
 
 const catBreeds = document.querySelectorAll('.Tabcontent-Cats .Breed');
+
+const globalSizeSelect = document.querySelector('#size');
+const globalCoatSelect = document.querySelector('#coat');
+const globalEnergySelect = document.querySelector('#energy');
+
 const globalSizeSelectValue = document.querySelector('.FilterOption-Size .Select-Value');
 const globalCoatSelectValue = document.querySelector('.FilterOption-Coat .Select-Value');
 const globalEnergySelectValue = document.querySelector('.FilterOption-Energy .Select-Value');
 
+const buttonClean = document.querySelector('.Cats-Filter .Clear');
+
 function filterCat() {
-  const filterCat = document.forms.filterCat;
-  const filterSize = filterCat.elements.size;
-  const filterCoat = filterCat.elements.coat;
-  const filterEnergy = filterCat.elements.energy;
-  const buttonClean = document.querySelector('.Cats-Filter .Clear');
 
   function handleChangeSelect(event) {
     const label = event.target.closest('label');
@@ -52,16 +54,20 @@ function filterCat() {
     }
   }
 
-  filterSize.addEventListener('change', handleChangeSelect);
-  filterSize.addEventListener('change', handleFilterBreeds);
+  globalSizeSelect.addEventListener('change', handleChangeSelect);
+  globalSizeSelect.addEventListener('change', handleFilterBreeds);
 
-  filterCoat.addEventListener('change', handleChangeSelect);
-  filterCoat.addEventListener('change', handleFilterBreeds);
+  globalCoatSelect.addEventListener('change', handleChangeSelect);
+  globalCoatSelect.addEventListener('change', handleFilterBreeds);
 
-  filterEnergy.addEventListener('change', handleChangeSelect);
-  filterEnergy.addEventListener('change', handleFilterBreeds);
+  globalEnergySelect.addEventListener('change', handleChangeSelect);
+  globalEnergySelect.addEventListener('change', handleFilterBreeds);
 
   buttonClean.addEventListener('click', function(e) {
+    globalSizeSelect.value = 'all';
+    globalCoatSelect.value = 'all';
+    globalEnergySelect.value = 'all';
+
     globalSizeSelectValue.innerHTML = 'All sizes';
     globalCoatSelectValue.innerHTML = 'All coat';
     globalEnergySelectValue.innerHTML = 'All energy';
