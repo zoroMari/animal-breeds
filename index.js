@@ -15,3 +15,35 @@ function openAnimals(evt, animalName) {
 }
 
 document.getElementById('defaultOpen').click();
+
+
+const catBreeds = document.querySelectorAll('.Tabcontent-Cats .Breed');
+
+
+function filterCat() {
+  const filterCat = document.forms.filterCat;
+  const filterSize = filterCat.elements.size;
+  const filterCoat = filterCat.elements.coat;
+  const filterEnergy = filterCat.elements.energy;
+  const buttonClean = document.querySelector('.Cats-Filter .Clear');
+
+  function handleChangeSelect(event) {
+    const label = event.target.closest('label');
+    const selectValue = label.querySelector('.Select-Value');
+
+    selectValue.innerHTML = event.target.options[event.target.selectedIndex].text;
+  }
+
+  filterSize.addEventListener('change', handleChangeSelect);
+  filterCoat.addEventListener('change', handleChangeSelect);
+  filterEnergy.addEventListener('change', handleChangeSelect);
+
+  buttonClean.addEventListener('click', function() {
+    filterSize.removeEventListener('change', handleChangeSelect);
+    filterCoat.removeEventListener('change', handleChangeSelect);
+    filterEnergy.removeEventListener('change', handleChangeSelect);
+  });
+}
+
+filterCat();
+
