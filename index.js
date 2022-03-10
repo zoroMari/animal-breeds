@@ -64,6 +64,8 @@ function filterCat() {
 
     if (!availableItems) {
       document.querySelector('.Message').style.display = 'flex';
+    } else {
+      document.querySelector('.Message').style.display = 'none';
     }
   }
 
