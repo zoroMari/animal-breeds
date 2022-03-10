@@ -300,3 +300,19 @@ h1 {
   background-position: 50%;
 }
 
+.Message {
+  font: var(--font-h2);
+  font-weight: 500;
+  color: var(--color-red);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 48px auto;
+}
+
+.Message p:not(:last-child) {
+  margin-bottom: 24px;
+  color: var(--color-black);
+}

@@ -17,25 +17,26 @@ function openAnimals(evt, animalName) {
 document.getElementById('defaultOpen').click();
 
 
-const catBreeds = document.querySelectorAll('.Tabcontent-Cats .Breed');
-
-const globalSizeSelect = document.querySelector('#size');
-const globalCoatSelect = document.querySelector('#coat');
-const globalEnergySelect = document.querySelector('#energy');
-
-const globalSizeSelectValue = document.querySelector('.FilterOption-Size .Select-Value');
-const globalCoatSelectValue = document.querySelector('.FilterOption-Coat .Select-Value');
-const globalEnergySelectValue = document.querySelector('.FilterOption-Energy .Select-Value');
-
-const buttonClean = document.querySelector('.Cats-Filter .Clear');
-
-const state = {
-  size: 'all',
-  coat: 'all',
-  energy: 'all',
-}
 
 function filterCat() {
+  const catBreeds = document.querySelectorAll('.Tabcontent-Cats .Breed');
+
+  const globalSizeSelect = document.querySelector('#size');
+  const globalCoatSelect = document.querySelector('#coat');
+  const globalEnergySelect = document.querySelector('#energy');
+  
+  const globalSizeSelectValue = document.querySelector('.FilterOption-Size .Select-Value');
+  const globalCoatSelectValue = document.querySelector('.FilterOption-Coat .Select-Value');
+  const globalEnergySelectValue = document.querySelector('.FilterOption-Energy .Select-Value');
+  
+  const buttonClean = document.querySelector('.Cats-Filter .Clear');
+  
+  const state = {
+    size: 'all',
+    coat: 'all',
+    energy: 'all',
+  }
+
 
   function handleChangeSelect(event) {
     const label = event.target.closest('label');
@@ -44,7 +45,10 @@ function filterCat() {
     selectValue.innerHTML = event.target.options[event.target.selectedIndex].text;
   }
 
+
   function filterState(state) {
+    let availableItems = 0;
+
     catBreeds.forEach((item) => {
       const isSizeFilterCorrect = item.dataset.size === state.size || state.size === 'all';
       const isCoatFilterCorrect = item.dataset.coat === state.coat || state.coat === 'all';
@@ -52,11 +56,17 @@ function filterCat() {
 
       if (isSizeFilterCorrect && isCoatFilterCorrect && isEnergyFilterCorrect) {
         item.style.display = 'flex';
+        availableItems++;
       } else {
         item.style.display = 'none';
       }
     });
+
+    if (!availableItems) {
+      document.querySelector('.Message').style.display = 'flex';
+    }
   }
+
 
   function handleSizeFilterChange(event) {
     const selectedOption = event.target.options[event.target.selectedIndex];
@@ -66,6 +76,7 @@ function filterCat() {
     handleChangeSelect(event)
   }
 
+
   function handleCoatFilterChange(event) {
     const selectedOption = event.target.options[event.target.selectedIndex];
     state.coat = selectedOption.value;
@@ -73,6 +84,7 @@ function filterCat() {
     filterState(state);
     handleChangeSelect(event)
   }
+
 
   function handleEnergyFilterChange(event) {
     const selectedOption = event.target.options[event.target.selectedIndex];
@@ -82,10 +94,9 @@ function filterCat() {
     handleChangeSelect(event)
   }
 
+
   globalSizeSelect.addEventListener('change', handleSizeFilterChange);
-
   globalCoatSelect.addEventListener('change', handleCoatFilterChange);
-
   globalEnergySelect.addEventListener('change', handleEnergyFilterChange);
 
 
@@ -106,7 +117,6 @@ function filterCat() {
       item.style.display = 'flex';
     });
   });
-
 }
 
 filterCat();
