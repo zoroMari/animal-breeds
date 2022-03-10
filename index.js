@@ -17,17 +17,26 @@ function openAnimals(evt, animalName) {
 document.getElementById('defaultOpen').click();
 
 
-const catBreeds = document.querySelectorAll('.Tabcontent-Cats .Breed');
-const globalSizeSelectValue = document.querySelector('.FilterOption-Size .Select-Value');
-const globalCoatSelectValue = document.querySelector('.FilterOption-Coat .Select-Value');
-const globalEnergySelectValue = document.querySelector('.FilterOption-Energy .Select-Value');
 
 function filterCat() {
-  const filterCat = document.forms.filterCat;
-  const filterSize = filterCat.elements.size;
-  const filterCoat = filterCat.elements.coat;
-  const filterEnergy = filterCat.elements.energy;
+  const catBreeds = document.querySelectorAll('.Tabcontent-Cats .Breed');
+
+  const globalSizeSelect = document.querySelector('#size');
+  const globalCoatSelect = document.querySelector('#coat');
+  const globalEnergySelect = document.querySelector('#energy');
+  
+  const globalSizeSelectValue = document.querySelector('.FilterOption-Size .Select-Value');
+  const globalCoatSelectValue = document.querySelector('.FilterOption-Coat .Select-Value');
+  const globalEnergySelectValue = document.querySelector('.FilterOption-Energy .Select-Value');
+  
   const buttonClean = document.querySelector('.Cats-Filter .Clear');
+  
+  const state = {
+    size: 'all',
+    coat: 'all',
+    energy: 'all',
+  }
+
 
   function handleChangeSelect(event) {
     const label = event.target.closest('label');
@@ -36,32 +45,70 @@ function filterCat() {
     selectValue.innerHTML = event.target.options[event.target.selectedIndex].text;
   }
 
-  function handleFilterBreeds(event) {
-    const selectedOption = event.target.options[event.target.selectedIndex];
 
-    const name = event.target.name;
+  function filterState(state) {
+    let availableItems = 0;
 
-    for (let breed of catBreeds) {
+    catBreeds.forEach((item) => {
+      const isSizeFilterCorrect = item.dataset.size === state.size || state.size === 'all';
+      const isCoatFilterCorrect = item.dataset.coat === state.coat || state.coat === 'all';
+      const isEnergyFilterCorrect = item.dataset.energy === state.energy || state.energy === 'all';
 
-      if (breed.dataset[name] !== selectedOption.value  
-        && selectedOption.value !== 'all') {
-          breed.style.display = "none";
-        } else {
-          breed.style.display = "flex";
-        }
+      if (isSizeFilterCorrect && isCoatFilterCorrect && isEnergyFilterCorrect) {
+        item.style.display = 'flex';
+        availableItems++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    if (!availableItems) {
+      document.querySelector('.Message').style.display = 'flex';
     }
   }
 
-  filterSize.addEventListener('change', handleChangeSelect);
-  filterSize.addEventListener('change', handleFilterBreeds);
 
-  filterCoat.addEventListener('change', handleChangeSelect);
-  filterCoat.addEventListener('change', handleFilterBreeds);
+  function handleSizeFilterChange(event) {
+    const selectedOption = event.target.options[event.target.selectedIndex];
+    state.size = selectedOption.value;
+  
+    filterState(state);
+    handleChangeSelect(event)
+  }
 
-  filterEnergy.addEventListener('change', handleChangeSelect);
-  filterEnergy.addEventListener('change', handleFilterBreeds);
+
+  function handleCoatFilterChange(event) {
+    const selectedOption = event.target.options[event.target.selectedIndex];
+    state.coat = selectedOption.value;
+  
+    filterState(state);
+    handleChangeSelect(event)
+  }
+
+
+  function handleEnergyFilterChange(event) {
+    const selectedOption = event.target.options[event.target.selectedIndex];
+    state.energy = selectedOption.value;
+  
+    filterState(state);
+    handleChangeSelect(event)
+  }
+
+
+  globalSizeSelect.addEventListener('change', handleSizeFilterChange);
+  globalCoatSelect.addEventListener('change', handleCoatFilterChange);
+  globalEnergySelect.addEventListener('change', handleEnergyFilterChange);
+
 
   buttonClean.addEventListener('click', function(e) {
+    globalSizeSelect.value = 'all';
+    globalCoatSelect.value = 'all';
+    globalEnergySelect.value = 'all';
+
+    state.size = 'all sizes';
+    state.coat = 'all coat';
+    state. energy = 'all energy';
+
     globalSizeSelectValue.innerHTML = 'All sizes';
     globalCoatSelectValue.innerHTML = 'All coat';
     globalEnergySelectValue.innerHTML = 'All energy';
@@ -70,7 +117,6 @@ function filterCat() {
       item.style.display = 'flex';
     });
   });
-
 }
 
 filterCat();
