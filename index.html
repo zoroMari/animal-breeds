@@ -34,17 +34,17 @@
           Thinking about getting a cat but not sure which breed is right for you? We can help.
         </p>
 
-        <form class="Filter Cats-Filter" name="filterCat">
+        <form class="Filter Cats-Filter" name="filterCat" onsubmit="event.preventDefault()">
           <label class="FilterOption FilterOption-Size">
             <p class="Label">size</p>
 
             <div class="Select">
-              <p class="Select-Value">All Sizes</p>
+              <p class="Select-Value">All sizes</p>
               <img src="img/icons/arrow_open.svg">
             </div>
 
-            <select name="size">
-              <option value="all">All Sizes</option>
+            <select name="size" id="size">
+              <option value="all">All sizes</option>
               <option value="large">Large</option>
               <option value="small">Small</option>
             </select>
@@ -58,7 +58,7 @@
               <img src="img/icons/arrow_open.svg">
             </div>
             
-            <select name="coat">
+            <select name="coat" id="coat">
               <option value="all">All coat</option>
               <option value="long">Long</option>
               <option value="medium">Medium</option>
@@ -86,7 +86,7 @@
         </form>
 
         <section class="Breeds">
-          <div class="Breed Bengal" id="Bengal" data-size="short" data-coat="medium" data-energy="high">
+          <div class="Breed Bengal" id="Bengal" data-size="large" data-coat="medium" data-energy="high">
             <div class="Breed-Img"></div>
             <div class="Breed-Info">
               <p class="Breed-Name">Bengal</p>
@@ -97,7 +97,7 @@
             </div>
           </div>
 
-          <div class="Breed MainCoon" id="MainCoon">
+          <div class="Breed MainCoon" id="MainCoon" data-size="large" data-coat="long" data-energy="medium">
             <div class="Breed-Img"></div>
             <div class="Breed-Info">
               <p class="Breed-Name">Main Coon</p>
@@ -108,7 +108,7 @@
             </div>
           </div>
 
-          <div class="Breed Siamese" id="Siamese">
+          <div class="Breed Siamese" id="Siamese" data-size="large" data-coat="medium" data-energy="high">
             <div class="Breed-Img"></div>
             <div class="Breed-Info">
               <p class="Breed-Name">Siamese</p>
@@ -119,7 +119,8 @@
             </div>
           </div>
 
-          <div class="Breed Abyssinian" id="Abyssinian">
+          <div class="Breed Abyssinian" id="Abyssinian" data-size="small" data-coat="medium" 
+          data-energy="high">
             <div class="Breed-Img"></div>
             <div class="Breed-Info">
               <p class="Breed-Name">Abyssinian</p>
@@ -130,7 +131,8 @@
             </div>
           </div>
 
-          <div class="Breed BritishShorthair" id="BritishShorthair">
+          <div class="Breed BritishShorthair" id="BritishShorthair" data-size="large" data-coat="short" 
+          data-energy="low">
             <div class="Breed-Img"></div>
             <div class="Breed-Info">
               <p class="Breed-Name">British Shorthair</p>
@@ -141,7 +143,7 @@
             </div>
           </div>
 
-          <div class="Breed Sphynx" id="Sphynx">
+          <div class="Breed Sphynx" id="Sphynx" data-size="small" data-coat="short" data-energy="high">
             <div class="Breed-Img"></div>
             <div class="Breed-Info">
               <p class="Breed-Name">Sphynx</p>
@@ -152,7 +154,8 @@
             </div>
           </div>
 
-          <div class="Breed AmericanShorthair" id="AmericanShorthair">
+          <div class="Breed AmericanShorthair" id="AmericanShorthair" data-size="large" data-coat="short" 
+          data-energy="medium">
             <div class="Breed-Img"></div>
             <div class="Breed-Info">
               <p class="Breed-Name">American Shorthair</p>
@@ -163,7 +166,8 @@
             </div>
           </div>
 
-          <div class="Breed CornishRex" id="CornishRex">
+          <div class="Breed CornishRex" id="CornishRex" data-size="small" data-coat="short" 
+          data-energy="high">
             <div class="Breed-Img"></div>
             <div class="Breed-Info">
               <p class="Breed-Name">Cornish Rex</p>

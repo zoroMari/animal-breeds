@@ -18,7 +18,9 @@ document.getElementById('defaultOpen').click();
 
 
 const catBreeds = document.querySelectorAll('.Tabcontent-Cats .Breed');
-
+const globalSizeSelectValue = document.querySelector('.FilterOption-Size .Select-Value');
+const globalCoatSelectValue = document.querySelector('.FilterOption-Coat .Select-Value');
+const globalEnergySelectValue = document.querySelector('.FilterOption-Energy .Select-Value');
 
 function filterCat() {
   const filterCat = document.forms.filterCat;
@@ -34,15 +36,41 @@ function filterCat() {
     selectValue.innerHTML = event.target.options[event.target.selectedIndex].text;
   }
 
-  filterSize.addEventListener('change', handleChangeSelect);
-  filterCoat.addEventListener('change', handleChangeSelect);
-  filterEnergy.addEventListener('change', handleChangeSelect);
+  function handleFilterBreeds(event) {
+    const selectedOption = event.target.options[event.target.selectedIndex];
 
-  buttonClean.addEventListener('click', function() {
-    filterSize.removeEventListener('change', handleChangeSelect);
-    filterCoat.removeEventListener('change', handleChangeSelect);
-    filterEnergy.removeEventListener('change', handleChangeSelect);
+    const name = event.target.name;
+
+    for (let breed of catBreeds) {
+
+      if (breed.dataset[name] !== selectedOption.value  
+        && selectedOption.value !== 'all') {
+          breed.style.display = "none";
+        } else {
+          breed.style.display = "flex";
+        }
+    }
+  }
+
+  filterSize.addEventListener('change', handleChangeSelect);
+  filterSize.addEventListener('change', handleFilterBreeds);
+
+  filterCoat.addEventListener('change', handleChangeSelect);
+  filterCoat.addEventListener('change', handleFilterBreeds);
+
+  filterEnergy.addEventListener('change', handleChangeSelect);
+  filterEnergy.addEventListener('change', handleFilterBreeds);
+
+  buttonClean.addEventListener('click', function(e) {
+    globalSizeSelectValue.innerHTML = 'All sizes';
+    globalCoatSelectValue.innerHTML = 'All coat';
+    globalEnergySelectValue.innerHTML = 'All energy';
+
+    catBreeds.forEach((item) => {
+      item.style.display = 'flex';
+    });
   });
+
 }
 
 filterCat();
