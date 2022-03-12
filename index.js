@@ -30,6 +30,8 @@ function filterCat() {
   const globalEnergySelectValue = document.querySelector('.FilterOption-Energy .Select-Value');
   
   const buttonClean = document.querySelector('.Cats-Filter .Clear');
+
+  const background = document.querySelector('.Background');
   
   const state = {
     size: 'all',
@@ -119,6 +121,20 @@ function filterCat() {
       item.style.display = 'flex';
     });
   });
+
+
+  function handlerOpenPopUp(event) {
+    target = event.target.closest('.Breed');
+
+    if(!target) return;
+
+    background.style.display = 'block';
+
+  }
+
+
+  document.querySelector('.Tabcontent-Cats .Breeds').addEventListener('click', handlerOpenPopUp);
+
 }
 
 filterCat();
