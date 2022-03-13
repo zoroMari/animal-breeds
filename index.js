@@ -1,3 +1,13 @@
+// import cat from './cat'
+// console.log('cat >>>', cat);
+
+const additionlInfo = [
+  {
+    id: 1,
+    description: '0',
+  }
+]
+
 function openAnimals(evt, animalName) {
 
   const tabcontent = document.querySelectorAll('.Tabcontent');
@@ -20,6 +30,13 @@ document.getElementById('defaultOpen').click();
 
 function filterCat() {
   const catBreeds = document.querySelectorAll('.Tabcontent-Cats .Breed');
+  const cats = Array.from(catBreeds).map((item) => {
+    const result = { ...item.dataset };
+    const info = additionlInfo.find((item) => +result.id === item.id);
+    return { ...result, ...info };
+  });
+  console.log('cats >>>', cats);
+  console.log('catBreeds >>>', catBreeds);
 
   const globalSizeSelect = document.querySelector('#size');
   const globalCoatSelect = document.querySelector('#coat');
