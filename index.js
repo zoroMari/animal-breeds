@@ -149,6 +149,33 @@ const catBreedsInfo = [
   },
 ];
 
+function capitalize(string) {
+  return string.slice(0, 1).toUpperCase() + string.slice(1);
+}
+
+function createFilters(animalsInfo, keys) {
+  if (!animalsInfo || !keys) throw new Error('Please, provide both: input list and necessary keys');
+
+  const filtersMap = keys.reduce((acc, curr) => ({
+    ...acc,
+    [curr]: { title: curr, options: [{ value: 'all', name: `All ${curr}` }] },
+  }), { });
+
+  animalsInfo.forEach((item) => {
+    keys.forEach((key) => {
+      if (!item[key]) return;
+
+      const isOptionInList = filtersMap[key].options.find((option) => option.value === item[key]);
+      if (isOptionInList) return;
+
+      filtersMap[key].options.push({ value: item[key], name: capitalize(item[key]) });
+    })
+  });
+
+  return Object.values(filtersMap).filter((item) => item.options.length > 1);
+}
+
+console.log(' >>>', createFilters(catBreedsInfo, ['coat', 'size', 'energy', 'weight']));
 
 function openAnimals(evt, animalName) {
 
