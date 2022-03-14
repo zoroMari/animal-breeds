@@ -298,9 +298,9 @@ function filterCat() {
     globalCoatSelect.value = 'all';
     globalEnergySelect.value = 'all';
 
-    state.size = 'all sizes';
-    state.coat = 'all coat';
-    state. energy = 'all energy';
+    state.size = 'all';
+    state.coat = 'all';
+    state. energy = 'all';
 
     globalSizeSelectValue.innerHTML = 'All sizes';
     globalCoatSelectValue.innerHTML = 'All coat';
@@ -309,6 +309,9 @@ function filterCat() {
     catBreeds.forEach((item) => {
       item.style.display = 'flex';
     });
+
+    document.querySelector('.Message').style.display = 'none';
+
   });
 }
 
