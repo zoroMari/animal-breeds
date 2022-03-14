@@ -182,8 +182,8 @@ const cats = [
 
 const dogs = [
   new Animal({
-    name: 'Huski',
-    id: 'Huski',
+    name: 'Husky',
+    id: 'Husky',
     mainImg: 'img/cats/bengal/bengal_main.jpeg',
     size: 'large',
     coat: 'medium',
@@ -202,8 +202,8 @@ const dogs = [
   }),
 
   new Animal({
-    name: 'Huski',
-    id: 'Huski',
+    name: 'Husky',
+    id: 'Husky',
     mainImg: 'img/cats/bengal/bengal_main.jpeg',
     size: 'large',
     coat: 'medium',
@@ -274,7 +274,7 @@ const rootDogs = document.querySelector('.Dogs .Breeds');
 const rootRats = document.querySelector('.Rats .Breeds');
 
 insertAnimalCards(cats, rootCats);
-insertAnimalCards(dogs, rootDogs);
+// insertAnimalCards(dogs, rootDogs);
 // insertAnimalCards(rats, rootRats);
 
 
