@@ -116,7 +116,7 @@ h1 {
 
 .Main .Tabs {
   width: auto;
-  height: auto;
+  height: 81px;
   display: flex;
   padding: 0px 80px;
   background-color: var(--color-white);
@@ -127,7 +127,7 @@ h1 {
   font: var(--font-h2);
   color: var(--color-black);
   font-weight: 500;
-  padding: 24px 0px;
+  padding: auto 0px;
 }
 
 .Main .Tabs button:not(:last-child) {
@@ -204,6 +204,7 @@ h1 {
   display: flex;
   align-items: center;
 }
+
 
 .Breeds {
   display: flex;
@@ -328,3 +329,14 @@ h1 {
   display: none;
 }
 
+.CommingSoon {
+  font: var(--font-h2);
+  font-weight: 500;
+  color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 48px auto;
+}
