@@ -90,112 +90,156 @@
           <p> Please, change filter conditions.</p>
         </div>
 
-        <section class="Breeds">
-          <div class="Breed Bengal" id="Bengal" data-size="large" data-coat="medium" data-energy="high">
-            <div class="Breed-Img"></div>
-            <div class="Breed-Info">
-              <p class="Breed-Name">Bengal</p>
-              <button>
-                <p>Learn more</p>
-                <img src="img/icons/learnMore.svg">
-              </button>
-            </div>
-          </div>
-
-          <div class="Breed MainCoon" id="MainCoon" data-size="large" data-coat="long" data-energy="medium">
-            <div class="Breed-Img"></div>
-            <div class="Breed-Info">
-              <p class="Breed-Name">Main Coon</p>
-              <button>
-                <p>Learn more</p>
-                <img src="img/icons/learnMore.svg">
-              </button>
-            </div>
-          </div>
-
-          <div class="Breed Siamese" id="Siamese" data-size="large" data-coat="medium" data-energy="high">
-            <div class="Breed-Img"></div>
-            <div class="Breed-Info">
-              <p class="Breed-Name">Siamese</p>
-              <button>
-                <p>Learn more</p>
-                <img src="img/icons/learnMore.svg">
-              </button>
-            </div>
-          </div>
-
-          <div class="Breed Abyssinian" id="Abyssinian" data-size="small" data-coat="medium" 
-          data-energy="high">
-            <div class="Breed-Img"></div>
-            <div class="Breed-Info">
-              <p class="Breed-Name">Abyssinian</p>
-              <button>
-                <p>Learn more</p>
-                <img src="img/icons/learnMore.svg">
-              </button>
-            </div>
-          </div>
-
-          <div class="Breed BritishShorthair" id="BritishShorthair" data-size="large" data-coat="short" 
-          data-energy="low">
-            <div class="Breed-Img"></div>
-            <div class="Breed-Info">
-              <p class="Breed-Name">British Shorthair</p>
-              <button>
-                <p>Learn more</p>
-                <img src="img/icons/learnMore.svg">
-              </button>
-            </div>
-          </div>
-
-          <div class="Breed Sphynx" id="Sphynx" data-size="small" data-coat="short" data-energy="high">
-            <div class="Breed-Img"></div>
-            <div class="Breed-Info">
-              <p class="Breed-Name">Sphynx</p>
-              <button>
-                <p>Learn more</p>
-                <img src="img/icons/learnMore.svg">
-              </button>
-            </div>
-          </div>
-
-          <div class="Breed AmericanShorthair" id="AmericanShorthair" data-size="large" data-coat="short" 
-          data-energy="medium">
-            <div class="Breed-Img"></div>
-            <div class="Breed-Info">
-              <p class="Breed-Name">American Shorthair</p>
-              <button>
-                <p>Learn more</p>
-                <img src="img/icons/learnMore.svg">
-              </button>
-            </div>
-          </div>
-
-          <div class="Breed CornishRex" id="CornishRex" data-size="small" data-coat="short" 
-          data-energy="high">
-            <div class="Breed-Img"></div>
-            <div class="Breed-Info">
-              <p class="Breed-Name">Cornish Rex</p>
-              <button>
-                <p>Learn more</p>
-                <img src="img/icons/learnMore.svg">
-              </button>
-            </div>
-          </div>
+        <section class="Cats-Breeds Breeds">
         </section>
-
       </section>
 
-      <section class="Tabcontent Dogs" id="Dogs">
-        <p>
+
+      <section class="Tabcontent Tabcontent-Dogs Dogs" id="Dogs">
+
+        <div class="CommingSoon"> 
+          <p>Dogs coming very soon!</p> 
+        </div>
+
+        <!-- <p class="Text Dogs-Text"> 
           Thinking about getting a dog but not sure which breed is right for you? We can help.
         </p>
+
+        <form class="Filter Dogs-Filter" name="filterDog" onsubmit="event.preventDefault()">
+          <label class="FilterOption FilterOption-Size">
+            <p class="Label">size</p>
+
+            <div class="Select">
+              <p class="Select-Value">All sizes</p>
+              <img src="img/icons/arrow_open.svg">
+            </div>
+
+            <select name="size" id="size">
+              <option value="all">All sizes</option>
+              <option value="large">Large</option>
+              <option value="small">Small</option>
+            </select>
+          </label>
+
+          <label class="FilterOption FilterOption-Coat">
+            <p class="Label">coat</p>
+
+            <div class="Select">
+              <p class="Select-Value">All coat</p>
+              <img src="img/icons/arrow_open.svg">
+            </div>
+            
+            <select name="coat" id="coat">
+              <option value="all">All coat</option>
+              <option value="long">Long</option>
+              <option value="medium">Medium</option>
+              <option value="short">Short</option>
+            </select>
+          </label>
+
+          <label class="FilterOption FilterOption-Energy">
+            <p class="Label">energy</p>
+
+            <div class="Select">
+              <p class="Select-Value">All energy</p>
+              <img src="img/icons/arrow_open.svg">
+            </div>
+            
+            <select name="energy" id="energy">
+              <option value="all">All energy</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </label>
+
+          <button class="Clear">Clear filter</button>
+        </form>
+
+        <div class="Message"> 
+          <p>There is not such breed.</p> 
+          <p> Please, change filter conditions.</p>
+        </div> -->
+
+        <section class="Dogs-Breeds Breeds">
+        </section>
       </section>
+
+
+      <section class="Tabcontent Tabcontent-Rats Rats" id="Rats">
+
+        <div class="CommingSoon"> 
+          <p>Rats coming very soon!</p> 
+        </div>
+
+        <!-- <p class="Text Rats-Text"> 
+          Thinking about getting a rat but not sure which breed is right for you? We can help.
+        </p>
+
+        <form class="Filter Rats-Filter" name="filterRat" onsubmit="event.preventDefault()">
+          <label class="FilterOption FilterOption-Size">
+            <p class="Label">size</p>
+
+            <div class="Select">
+              <p class="Select-Value">All sizes</p>
+              <img src="img/icons/arrow_open.svg">
+            </div>
+
+            <select name="size" id="size">
+              <option value="all">All sizes</option>
+              <option value="large">Large</option>
+              <option value="small">Small</option>
+            </select>
+          </label>
+
+          <label class="FilterOption FilterOption-Coat">
+            <p class="Label">coat</p>
+
+            <div class="Select">
+              <p class="Select-Value">All coat</p>
+              <img src="img/icons/arrow_open.svg">
+            </div>
+            
+            <select name="coat" id="coat">
+              <option value="all">All coat</option>
+              <option value="long">Long</option>
+              <option value="medium">Medium</option>
+              <option value="short">Short</option>
+            </select>
+          </label>
+
+          <label class="FilterOption FilterOption-Energy">
+            <p class="Label">energy</p>
+
+            <div class="Select">
+              <p class="Select-Value">All energy</p>
+              <img src="img/icons/arrow_open.svg">
+            </div>
+            
+            <select name="energy" id="energy">
+              <option value="all">All energy</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </label>
+
+          <button class="Clear">Clear filter</button>
+        </form>
+
+        <div class="Message"> 
+          <p>There is not such breed.</p> 
+          <p> Please, change filter conditions.</p>
+        </div> -->
+
+        <section class="Rats-Breeds Breeds">
+        </section>
+      </section>
+
+      
 
     </main>
 
     <script src="index.js"></script>
-
-    
   </body>
 </html>
