@@ -1,5 +1,29 @@
-const catBreedsInfo = [
-  {
+class Animal {
+  constructor({
+    name,
+    id,
+    mainImg,
+    size,
+    coat,
+    energy,
+    characteristics,
+    lifespan,
+    colors,
+  }) {
+    this.name = name;
+    this.id = id;
+    this.mainImg = mainImg;
+    this.size = size;
+    this.coat = coat;
+    this.energy = energy;
+    this.characteristics = characteristics;
+    this.lifespan = lifespan;
+    this.colors = colors;
+  }
+}
+
+const cats = [
+  new Animal({
     name: 'Bengal',
     id: 'Bengal',
     mainImg: 'img/cats/bengal/bengal_main.jpeg',
@@ -17,8 +41,9 @@ const catBreedsInfo = [
       Most Bengal Cats’ coats have rich, highly contrasted shades of bright orange to light brown, 
       with dark spots or a distinctive marbling pattern. Some even have a “glitter” to the tips of 
       their fur, which glistens when the light hits it.`,
-  },
-  {
+  }),
+
+  new Animal({
     name: 'Main Coon',
     id: 'MainCoon',
     mainImg: 'img/cats/mainCoon/mainCoon_main.jpeg',
@@ -35,8 +60,9 @@ const catBreedsInfo = [
       The most common color for Maine Coon cats is brown tabby. However, they can be nearly any color 
       and pattern. Their eye colors, too, have a wide range from blue to green to gold, and can 
       include odd-eyes (i.e. two different colored eyes).`,
-  },
-  {
+  }),
+
+  new Animal({
     name: 'Siamese',
     id: 'Siamese',
     mainImg: 'img/cats/siameseCat/siameseCat_main.jpeg',
@@ -57,8 +83,9 @@ const catBreedsInfo = [
       meaning their ears, feet and tails are darker than their body, can range from brown to chocolate 
       to a blue gray and even lilac. Other point color variations include tabby and other patterns. 
       The body is light in color and usually appears as ivory, cream and even glacial white.`,
-  },
-  {
+  }),
+
+  new Animal({
     name: 'Abyssinian',
     id: 'Abyssinian',
     mainImg: 'img/cats/abyssinian/abyssinian_main.jpeg',
@@ -80,8 +107,9 @@ const catBreedsInfo = [
       color on each hair shaft. The warmth glow of their coat resembles wild cats like cougars. 
       The coat comes in four primary colors: ruddy brown, red, blue and fawn. 
       Some associations permit additional colors, however.`,
-  },
-  {
+  }),
+
+  new Animal({
     name: 'British Shorthair',
     id: 'BritishShorthair',
     mainImg: 'img/cats/britishShorthair/britishShorthair_main.jpeg',
@@ -97,8 +125,9 @@ const catBreedsInfo = [
     colors: `
       Although their coats come in almost every possible color and pattern, the most popular color 
       is blue (gray). These cats are sometimes referred to as British Blues.`,
-  },
-  {
+  }),
+
+  new Animal({
     name: 'Sphynx',
     id: 'Sphynx',
     mainImg: 'img/cats/sphynx/sphynx_main.jpg',
@@ -113,8 +142,9 @@ const catBreedsInfo = [
     colors: `
       Sphynx colors include white, black, blue, red, cream, chocolate, lavender, cinnamon and fawn, 
       plus various patterns and shadings.`,
-  },
-  {
+  }),
+
+  new Animal({
     name: 'American Shorthair',
     id: 'AmericanShorthair',
     mainImg: 'img/cats/americanShorthair/americanShorthair_main.png',
@@ -128,8 +158,9 @@ const catBreedsInfo = [
     lifespan: '15 to 20 years',
     colors: `
       White, black, blue, red, cream and silver, plus various patterns and shadings`,
-  },
-  {
+  }),
+
+  new Animal({
     name: 'Cornish Rex',
     id: 'CornishRex',
     mainImg: 'img/cats/cornishRex/cornishRex_main.jpeg',
@@ -146,8 +177,50 @@ const catBreedsInfo = [
     colors: `
       White, black, blue, red, cream, chocolate, lavender, silver, smoke and tabby, plus various 
       patterns and shadings`,
-  },
-];
+  }),
+]
+
+const dogs = [
+  new Animal({
+    name: 'Huski',
+    id: 'Huski',
+    mainImg: 'img/cats/bengal/bengal_main.jpeg',
+    size: 'large',
+    coat: 'medium',
+    energy: 'high',
+    characteristics: `
+      Bengal Cats have an athletic appearance with well-defined muscles, 
+      creating a lean, balanced appearance. They feature high cheekbones, dark markings around the eyes 
+      and the ears are small and pointed but round at the tips. Their coats have a unique, plush feel 
+      unlike any other cat breed.`,
+    lifespan: '12 to 16 years',
+    colors: `
+      One of the most distinctive features of this feline is its unique coat pattern and color.
+      Most Bengal Cats’ coats have rich, highly contrasted shades of bright orange to light brown, 
+      with dark spots or a distinctive marbling pattern. Some even have a “glitter” to the tips of 
+      their fur, which glistens when the light hits it.`,
+  }),
+
+  new Animal({
+    name: 'Huski',
+    id: 'Huski',
+    mainImg: 'img/cats/bengal/bengal_main.jpeg',
+    size: 'large',
+    coat: 'medium',
+    energy: 'high',
+    characteristics: `
+      Bengal Cats have an athletic appearance with well-defined muscles, 
+      creating a lean, balanced appearance. They feature high cheekbones, dark markings around the eyes 
+      and the ears are small and pointed but round at the tips. Their coats have a unique, plush feel 
+      unlike any other cat breed.`,
+    lifespan: '12 to 16 years',
+    colors: `
+      One of the most distinctive features of this feline is its unique coat pattern and color.
+      Most Bengal Cats’ coats have rich, highly contrasted shades of bright orange to light brown, 
+      with dark spots or a distinctive marbling pattern. Some even have a “glitter” to the tips of 
+      their fur, which glistens when the light hits it.`,
+  }),
+]
 
 
 function openAnimals(evt, animalName) {
@@ -169,41 +242,40 @@ function openAnimals(evt, animalName) {
 document.getElementById('defaultOpen').click();
 
 
-function showCatCards() {
-  const catsBreeds = document.querySelector('.Tabcontent-Cats .Cats-Breeds');
-
-  function createCatCardTemplate(catBreedsInfo) {
-    return `
-      <div class="Breed ${catBreedsInfo.id}" id="${catBreedsInfo.id}" data-size="${catBreedsInfo.size}" 
-        data-coat="${catBreedsInfo.coat}" data-energy="${catBreedsInfo.energy}">
-        <div class="Breed-Img"></div>
-        <div class="Breed-Info">
-          <p class="Breed-Name">${catBreedsInfo.name}</p>
-          <button>
-            <p>Learn more</p>
-            <img src="img/icons/learnMore.svg">
-          </button>
-        </div>
+function createAnimalTemplate(animal) {
+  return `
+    <div class="Breed ${animal.id}" id="${animal.id}" data-size="${animal.size}" 
+      data-coat="${animal.coat}" data-energy="${animal.energy}">
+      <div class="Breed-Img"></div>
+      <div class="Breed-Info">
+        <p class="Breed-Name">${animal.name}</p>
+        <button>
+          <p>Learn more</p>
+          <img src="img/icons/learnMore.svg">
+        </button>
       </div>
-    `;
-  }
-
-  function insertCatCards() {
-    const template = catBreedsInfo.reduce((acc, curr) => {
-      return `${acc}${createCatCardTemplate(curr)}`;
-    }, '');
-
-    catsBreeds.innerHTML = `
-      ${catsBreeds.innerHTML}
-      ${template}
-    `;
-  }
-
-  insertCatCards();
+    </div>
+  `;
 }
 
-showCatCards();
+function insertAnimalCards(animalsList, root) {
+  const template = animalsList.reduce((acc, curr) => {
+    return `${acc}${createAnimalTemplate(curr)}`;
+  }, '');
 
+  root.innerHTML = `
+    ${root.innerHTML}
+    ${template}
+  `;
+}
+
+const rootCats = document.querySelector('.Cats .Breeds');
+const rootDogs = document.querySelector('.Dogs .Breeds');
+const rootRats = document.querySelector('.Rats .Breeds');
+
+insertAnimalCards(cats, rootCats);
+insertAnimalCards(dogs, rootDogs);
+// insertAnimalCards(rats, rootRats);
 
 
 
