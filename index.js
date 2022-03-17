@@ -222,6 +222,15 @@ const dogs = [
   }),
 ]
 
+const rootCatBreeds = document.querySelector('.Cats .Breeds');
+const rootDogBreeds = document.querySelector('.Dogs .Breeds');
+const rootRatBreeds = document.querySelector('.Rats .Breeds');
+
+const rootFilterCats = document.querySelector('.Cats form');
+const rootFilterDogs = document.querySelector('.Dogs form');
+const rootFilterRats = document.querySelector('.Rats form');
+
+
 function openAnimals(evt, animalName) {
 
   const tabcontent = document.querySelectorAll('.Tabcontent');
@@ -241,6 +250,11 @@ function openAnimals(evt, animalName) {
 document.getElementById('defaultOpen').click();
 
 
+function capitalize(string) {
+  return string.slice(0, 1).toUpperCase() + string.slice(1);
+}
+
+
 function createAnimalTemplate(animal) {
   return `
     <div class="Breed ${animal.id}" id="${animal.id}" data-size="${animal.size}" 
@@ -257,31 +271,46 @@ function createAnimalTemplate(animal) {
   `;
 }
 
+
 function insertAnimalCards(animalsList, root) {
   const template = animalsList.reduce((acc, curr) => {
     return `${acc}${createAnimalTemplate(curr)}`;
   }, '');
 
-  root.innerHTML = `
-    ${root.innerHTML}
-    ${template}
+  root.innerHTML = template;
+}
+
+
+function createOptionTemplate(option) {
+  return `
+    <option value="${option.value}">${option.name}</option>
   `;
 }
 
-const rootCats = document.querySelector('.Cats .Breeds');
-const rootDogs = document.querySelector('.Dogs .Breeds');
-const rootRats = document.querySelector('.Rats .Breeds');
 
-insertAnimalCards(cats, rootCats);
-// insertAnimalCards(dogs, rootDogs);
-// insertAnimalCards(rats, rootRats);
+function createFilterTemplate(filterElem) {
+  const options = filterElem.options.reduce((acc, curr) => {
+    return `${acc}${createOptionTemplate(curr)}`
+  }, '');
 
+  return `
+    <label class="FilterOption FilterOption-${capitalize(filterElem.title)}">
+      <p class="Label">${filterElem.title}</p>
 
-function capitalize(string) {
-  return string.slice(0, 1).toUpperCase() + string.slice(1);
+      <div class="Select">
+        <p class="Select-Value">All ${filterElem.title}</p>
+        <img src="img/icons/arrow_open.svg">
+      </div>
+
+      <select name="${filterElem.title}" id="${filterElem.title}">
+        ${options}
+      </select>
+    </label>
+  `;
 }
 
-function createFilters(animalsInfo, keys) {
+
+function createFiltersOptions(animalsInfo, keys) {
   if (!animalsInfo || !keys) throw new Error('Please, provide both: input list and necessary keys');
 
   const filtersMap = keys.reduce((acc, curr) => ({
@@ -298,12 +327,31 @@ function createFilters(animalsInfo, keys) {
 
       filtersMap[key].options.push({ value: item[key], name: capitalize(item[key]) });
     })
+
   });
 
   return Object.values(filtersMap).filter((item) => item.options.length > 1);
 }
 
-console.log(' >>>', createFilters(cats, ['coat', 'size', 'energy', 'weight']));
+
+function insertFilterTemplate(filterElems, root) {
+  const template = filterElems.reduce((acc, curr) => {
+    return `${acc}${createFilterTemplate(curr)}`;
+  }, '');
+
+  root.innerHTML = `
+    ${template}
+    ${root.innerHTML}
+  `;
+}
+
+
+function insertFilter(animalsInfo, keys, root) {
+  const filterOptions = createFiltersOptions(animalsInfo, keys);
+
+  insertFilterTemplate(filterOptions, root);
+}
+
 
 function filterCat() {
   const catBreeds = document.querySelectorAll('.Tabcontent-Cats .Breed');
@@ -413,6 +461,22 @@ function filterCat() {
   });
 }
 
+
+// function test(event) {
+//   // .....
+//   const catsFilterd = cats.filter((item) => item.size === 'large');
+//   insertAnimalCards(catsFilterd, rootCatBreeds);
+// }
+
+
+insertAnimalCards(cats, rootCatBreeds);
+// insertAnimalCards(dogs, rootDogBreeds);
+// insertAnimalCards(rats, rootRatBreeds);
+
+
+insertFilter(cats, ['coat', 'size', 'energy', 'weight'], rootFilterCats);
+// insertFilter(dogs, rootFilterDogs);
+// insertFilter(rats, rootFilterRats);
+
+
 filterCat();
-
-
