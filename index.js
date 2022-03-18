@@ -1,3 +1,38 @@
+const SIZES = {
+  all: 'all',
+  small: 'small',
+  medium: 'medium',
+  large: 'large',
+};
+
+const COATS = {
+  all: 'all',
+  short: 'short',
+  medium: 'medium',
+  large: 'long',
+};
+
+const ENERGIES = {
+  all: 'all',
+  low: 'low',
+  medium: 'medium',
+  high: 'high',
+};
+
+class FilterState {
+  constructor({
+    size = SIZES.all,
+    coat = COATS.all,
+    energy = ENERGIES.all,
+  } = {}) {
+    this.size = size;
+    this.coat = coat;
+    this.energy = energy;
+  }
+}
+
+const currentState = new FilterState();
+
 class Animal {
   constructor({
     name,
@@ -27,7 +62,7 @@ const cats = [
     name: 'Bengal',
     id: 'Bengal',
     mainImg: 'img/cats/bengal/bengal_main.jpeg',
-    size: 'large',
+    size: SIZES.large,
     coat: 'medium',
     energy: 'high',
     characteristics: `
@@ -182,7 +217,7 @@ const cats = [
 
 const dogs = [
   new Animal({
-    name: 'Husky',
+    name: 'Husky_large',
     id: 'Husky',
     mainImg: 'img/cats/bengal/bengal_main.jpeg',
     size: 'large',
@@ -202,10 +237,10 @@ const dogs = [
   }),
 
   new Animal({
-    name: 'Husky',
+    name: 'Husky_small',
     id: 'Husky',
     mainImg: 'img/cats/bengal/bengal_main.jpeg',
-    size: 'large',
+    size: 'small',
     coat: 'medium',
     energy: 'high',
     characteristics: `
@@ -302,7 +337,7 @@ function createFilterTemplate(filterElem) {
         <img src="img/icons/arrow_open.svg">
       </div>
 
-      <select name="${filterElem.title}" id="${filterElem.title}">
+      <select name="${filterElem.title}" id="${filterElem.title}" onchange="handleOnChange(event)">
         ${options}
       </select>
     </label>
@@ -353,9 +388,70 @@ function insertFilter(animalsInfo, keys, root) {
 }
 
 
-function filterCat() {
-  const catBreeds = document.querySelectorAll('.Tabcontent-Cats .Breed');
+function handleChangeLableValue(event) {
+    const label = event.target.closest('label');
+    const selectValue = label.querySelector('.Select-Value');
 
+    selectValue.innerHTML = event.target.options[event.target.selectedIndex].text;
+}
+
+
+function filterState(state, animal) {
+  let availableItems = 0;
+
+  const animalFiltered = [];
+
+  animal.forEach((item) => {
+    const isSizeFilterCorrect = item.size === currentState.size || currentState.size === SIZES.all;
+    const isCoatFilterCorrect = item.coat === currentState.coat || currentState.coat === COATS.all;
+    const isEnergyFilterCorrect = item.energy === currentState.energy || currentState.energy === ENERGIES.all;
+
+    if (isSizeFilterCorrect && isCoatFilterCorrect && isEnergyFilterCorrect) {
+      animalFiltered.push(item);
+      availableItems++;
+    } 
+  });
+
+  console.log('animal >>>', animal);
+
+  insertAnimalCards(animalFiltered, rootCatBreeds);
+
+  // let animalType = animal.parentNode;
+  // console.log('animalType >>>', animalType);
+
+
+  // if (animalType === 'cats') {
+  //   insertAnimalCards(animalFiltered, rootCatBreeds);
+  // } else if (animalType === 'dogs') {
+  //   insertAnimalCards(animalFiltered, rootDogBreeds);
+  // } else {
+  //   insertAnimalCards(animalFiltered, rootRatBreeds);
+  // }
+  
+  if (!availableItems) {
+    document.querySelector('.Message').style.display = 'flex';
+  } else {
+    document.querySelector('.Message').style.display = 'none';
+  }
+}
+
+
+function handleOnChange(event) {
+  const selectedOption = event.target.options[event.target.selectedIndex];
+
+  const stateName = selectedOption.closest('select').id;
+  const animalCurr = (selectedOption.closest('.Tabcontent').id).toLowerCase();
+
+  console.log('animalCurr >>>', animalCurr);
+
+  currentState[stateName] = selectedOption.value;
+
+  filterState(currentState, cats);
+  handleChangeLableValue(event);
+}
+
+
+function clearFilter(event) {
   const globalSizeSelect = document.querySelector('#size');
   const globalCoatSelect = document.querySelector('#coat');
   const globalEnergySelect = document.querySelector('#energy');
@@ -363,120 +459,30 @@ function filterCat() {
   const globalSizeSelectValue = document.querySelector('.FilterOption-Size .Select-Value');
   const globalCoatSelectValue = document.querySelector('.FilterOption-Coat .Select-Value');
   const globalEnergySelectValue = document.querySelector('.FilterOption-Energy .Select-Value');
-  
-  const buttonClean = document.querySelector('.Cats-Filter .Clear');
 
-  const background = document.querySelector('.Background');
-  
-  const state = {
-    size: 'all',
-    coat: 'all',
-    energy: 'all',
-  }
+  globalSizeSelect.value = 'all';
+  globalCoatSelect.value = 'all';
+  globalEnergySelect.value = 'all';
 
+  globalSizeSelectValue.innerHTML = 'All sizes';
+  globalCoatSelectValue.innerHTML = 'All coat';
+  globalEnergySelectValue.innerHTML = 'All energy';
 
-  function handleChangeSelect(event) {
-    const label = event.target.closest('label');
-    const selectValue = label.querySelector('.Select-Value');
+  currentState.size = 'all';
+  currentState.coat = 'all';
+  currentState.energy = 'all';
 
-    selectValue.innerHTML = event.target.options[event.target.selectedIndex].text;
-  }
-
-
-  function filterState(state) {
-    let availableItems = 0;
-
-    catBreeds.forEach((item) => {
-      const isSizeFilterCorrect = item.dataset.size === state.size || state.size === 'all';
-      const isCoatFilterCorrect = item.dataset.coat === state.coat || state.coat === 'all';
-      const isEnergyFilterCorrect = item.dataset.energy === state.energy || state.energy === 'all';
-
-      if (isSizeFilterCorrect && isCoatFilterCorrect && isEnergyFilterCorrect) {
-        item.style.display = 'flex';
-        availableItems++;
-      } else {
-        item.style.display = 'none';
-      }
-    });
-
-    if (!availableItems) {
-      document.querySelector('.Message').style.display = 'flex';
-    } else {
-      document.querySelector('.Message').style.display = 'none';
-    }
-  }
-
-
-  function handleSizeFilterChange(event) {
-    const selectedOption = event.target.options[event.target.selectedIndex];
-    state.size = selectedOption.value;
-  
-    filterState(state);
-    handleChangeSelect(event)
-  }
-
-
-  function handleCoatFilterChange(event) {
-    const selectedOption = event.target.options[event.target.selectedIndex];
-    state.coat = selectedOption.value;
-  
-    filterState(state);
-    handleChangeSelect(event)
-  }
-
-
-  function handleEnergyFilterChange(event) {
-    const selectedOption = event.target.options[event.target.selectedIndex];
-    state.energy = selectedOption.value;
-  
-    filterState(state);
-    handleChangeSelect(event)
-  }
-
-
-  globalSizeSelect.addEventListener('change', handleSizeFilterChange);
-  globalCoatSelect.addEventListener('change', handleCoatFilterChange);
-  globalEnergySelect.addEventListener('change', handleEnergyFilterChange);
-
-
-  buttonClean.addEventListener('click', function(e) {
-    globalSizeSelect.value = 'all';
-    globalCoatSelect.value = 'all';
-    globalEnergySelect.value = 'all';
-
-    state.size = 'all';
-    state.coat = 'all';
-    state. energy = 'all';
-
-    globalSizeSelectValue.innerHTML = 'All sizes';
-    globalCoatSelectValue.innerHTML = 'All coat';
-    globalEnergySelectValue.innerHTML = 'All energy';
-
-    catBreeds.forEach((item) => {
-      item.style.display = 'flex';
-    });
-
-    document.querySelector('.Message').style.display = 'none';
-
-  });
+  insertAnimalCards(cats, rootCatBreeds);
+  document.querySelector('.Message').style.display = 'none';
 }
 
 
-// function test(event) {
-//   // .....
-//   const catsFilterd = cats.filter((item) => item.size === 'large');
-//   insertAnimalCards(catsFilterd, rootCatBreeds);
-// }
-
 
 insertAnimalCards(cats, rootCatBreeds);
-// insertAnimalCards(dogs, rootDogBreeds);
+insertAnimalCards(dogs, rootDogBreeds);
 // insertAnimalCards(rats, rootRatBreeds);
 
 
-insertFilter(cats, ['coat', 'size', 'energy', 'weight'], rootFilterCats);
-// insertFilter(dogs, rootFilterDogs);
+insertFilter(cats, ['size', 'coat', 'energy'], rootFilterCats);
+insertFilter(dogs, ['size', 'coat', 'energy'], rootFilterDogs);
 // insertFilter(rats, rootFilterRats);
-
-
-filterCat();

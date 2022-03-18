@@ -37,7 +37,7 @@
         </p>
 
         <form class="Filter Cats-Filter" name="filterCat" onsubmit="event.preventDefault()">
-          <button class="Clear">Clear filter</button>
+          <button class="Clear" onclick="clearFilter(event)">Clear filter</button>
         </form>
 
         <div class="Message"> 
@@ -52,8 +52,21 @@
 
       <section class="Tabcontent Tabcontent-Dogs Dogs" id="Dogs">
 
-        <div class="CommingSoon"> 
+        <!-- <div class="CommingSoon"> 
           <p>Dogs coming very soon!</p> 
+        </div> -->
+
+        <p class="Text Dogs-Text"> 
+          Thinking about getting a dog but not sure which breed is right for you? We can help.
+        </p>
+
+        <form class="Filter Dogs-Filter" name="filterDog" onsubmit="event.preventDefault()">
+          <button class="Clear" onclick="clearFilter(event)">Clear filter</button>
+        </form>
+
+        <div class="Message"> 
+          <p>There is not such breed.</p> 
+          <p> Please, change filter conditions.</p>
         </div>
 
         <section class="Dogs-Breeds Breeds">
