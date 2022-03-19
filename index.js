@@ -19,6 +19,12 @@ const ENERGIES = {
   high: 'high',
 };
 
+const ANIMAL_TYPES = {
+  cats: 'cats',
+  dogs: 'dogs',
+  rats: 'rats',
+};
+
 class FilterState {
   constructor({
     size = SIZES.all,
@@ -29,9 +35,17 @@ class FilterState {
     this.coat = coat;
     this.energy = energy;
   }
-}
 
-const currentState = new FilterState();
+  set(key, value) {
+    this[key] = value;
+  }
+
+  reset() {
+    this.size = SIZES.all;
+    this.coat = COATS.all;
+    this.energy = ENERGIES.all;
+  }
+}
 
 class Animal {
   constructor({
@@ -61,7 +75,7 @@ const cats = [
   new Animal({
     name: 'Bengal',
     id: 'Bengal',
-    mainImg: 'img/cats/bengal/bengal_main.jpeg',
+    mainImg: 'img/cats/bengal/bengal_main.png',
     size: SIZES.large,
     coat: 'medium',
     energy: 'high',
@@ -81,7 +95,7 @@ const cats = [
   new Animal({
     name: 'Main Coon',
     id: 'MainCoon',
-    mainImg: 'img/cats/mainCoon/mainCoon_main.jpeg',
+    mainImg: 'img/cats/mainCoon/mainCoon_main.png',
     size: 'large',
     coat: 'long',
     energy: 'medium',
@@ -100,7 +114,7 @@ const cats = [
   new Animal({
     name: 'Siamese',
     id: 'Siamese',
-    mainImg: 'img/cats/siameseCat/siameseCat_main.jpeg',
+    mainImg: 'img/cats/siameseCat/siameseCat_main.png',
     size: 'large',
     coat: 'medium',
     energy: 'high',
@@ -123,7 +137,7 @@ const cats = [
   new Animal({
     name: 'Abyssinian',
     id: 'Abyssinian',
-    mainImg: 'img/cats/abyssinian/abyssinian_main.jpeg',
+    mainImg: 'img/cats/abyssinian/abyssinian_main.png',
     size: 'small',
     coat: 'medium',
     energy: 'high',
@@ -147,7 +161,7 @@ const cats = [
   new Animal({
     name: 'British Shorthair',
     id: 'BritishShorthair',
-    mainImg: 'img/cats/britishShorthair/britishShorthair_main.jpeg',
+    mainImg: 'img/cats/britishShorthair/britishShorthair_main.png',
     size: 'large',
     coat: 'short',
     energy: 'low',
@@ -165,7 +179,7 @@ const cats = [
   new Animal({
     name: 'Sphynx',
     id: 'Sphynx',
-    mainImg: 'img/cats/sphynx/sphynx_main.jpg',
+    mainImg: 'img/cats/sphynx/sphynx_main.png',
     size: 'small',
     coat: 'short',
     energy: 'high',
@@ -198,7 +212,7 @@ const cats = [
   new Animal({
     name: 'Cornish Rex',
     id: 'CornishRex',
-    mainImg: 'img/cats/cornishRex/cornishRex_main.jpeg',
+    mainImg: 'img/cats/cornishRex/cornishRex_main.png',
     size: 'small',
     coat: 'short',
     energy: 'high',
@@ -217,43 +231,181 @@ const cats = [
 
 const dogs = [
   new Animal({
-    name: 'Husky_large',
+    name: 'Husky',
     id: 'Husky',
-    mainImg: 'img/cats/bengal/bengal_main.jpeg',
+    mainImg: 'img/dogs/husky/husky_main.png',
     size: 'large',
     coat: 'medium',
-    energy: 'high',
+    energy: 'medium',
     characteristics: `
-      Bengal Cats have an athletic appearance with well-defined muscles, 
-      creating a lean, balanced appearance. They feature high cheekbones, dark markings around the eyes 
-      and the ears are small and pointed but round at the tips. Their coats have a unique, plush feel 
-      unlike any other cat breed.`,
-    lifespan: '12 to 16 years',
+      Huskies are excellent with children and usually friendly to everyone, 
+      making them fantastic family dogs. However, this love of people means 
+      they are not natural guard dogs.`,
+    lifespan: '12 to 15 years',
     colors: `
-      One of the most distinctive features of this feline is its unique coat pattern and color.
-      Most Bengal Cats’ coats have rich, highly contrasted shades of bright orange to light brown, 
-      with dark spots or a distinctive marbling pattern. Some even have a “glitter” to the tips of 
-      their fur, which glistens when the light hits it.`,
+      The breed standard permits any color, though the dog can be black, silver, or a variety of tans. 
+      These are generally shaded and mixed with white markings, leading to varied wolfish markings 
+      on the head and muzzle.`,
   }),
 
   new Animal({
-    name: 'Husky_small',
-    id: 'Husky',
-    mainImg: 'img/cats/bengal/bengal_main.jpeg',
+    name: 'Pug',
+    id: 'Pug',
+    mainImg: 'img/dogs/mops/mops_main.png',
     size: 'small',
-    coat: 'medium',
+    coat: 'short',
+    energy: 'low',
+    characteristics: `
+      Pugs are even-tempered, outgoing, loving, and affectionate—all of which make them popular 
+      with families. The breed is known for being both calm and playful. 
+      Pugs are happy to romp with children and other pets or curl up on the couch for a nap.`,
+    lifespan: '12 to 15 years',
+    colors: `
+      The breed comes in two colors — fawn (light brown) and black. 
+      Clearly defined markings include a black mask and back trace (a line extending from 
+      the back of the skull to the tail).`,
+  }),
+  new Animal({
+    name: 'Corgi',
+    id: 'Corgi',
+    mainImg: 'img/dogs/corgi/corgi_main.png',
+    size: 'small',
+    coat: 'short',
+    energy: 'medium',
+    characteristics: `
+      Corgis are active, affectionate dogs. Despite having short legs, these canines are quick and agile. 
+      Corgis adore their families and are generally great with other pets and children. 
+      They're adaptable—comfortable living in an apartment or on a ranch.`,
+    lifespan: '12 to 15 years',
+    colors: `
+      Corgis come in all shades of red, sable, and brindle—as well as black with or without tan or 
+      brindle points—and blue merle, defined as black and gray, marbled. White on the neck, chest, 
+      legs, muzzle, underparts, tip of tail, and head (as a blaze) is possible. 
+      But white should never be the predominant color.`,
+  }),
+  new Animal({
+    name: 'Jagdterrier',
+    id: 'Jagdterrier',
+    mainImg: 'img/dogs/jagdterrier/jagdterrier_main.png',
+    size: 'medium',
+    coat: 'short',
     energy: 'high',
     characteristics: `
-      Bengal Cats have an athletic appearance with well-defined muscles, 
-      creating a lean, balanced appearance. They feature high cheekbones, dark markings around the eyes 
-      and the ears are small and pointed but round at the tips. Their coats have a unique, plush feel 
-      unlike any other cat breed.`,
+      The Jagdterrier is courageous, enduring, vital, full of temperament, reliable, 
+      sociable and trainable. He always takes pleasure in his work. 
+      The Jagdterrier is a versatile hunting dog from Germany. 
+      In German, literally means "hunt terrier." `,
     lifespan: '12 to 16 years',
     colors: `
-      One of the most distinctive features of this feline is its unique coat pattern and color.
-      Most Bengal Cats’ coats have rich, highly contrasted shades of bright orange to light brown, 
-      with dark spots or a distinctive marbling pattern. Some even have a “glitter” to the tips of 
-      their fur, which glistens when the light hits it.`,
+      His coat is usually black and tan, but can be dark brown or grayish-black as well.`,
+  }),
+  new Animal({
+    name: 'Labrador Retrievers',
+    id: 'Labrador',
+    mainImg: 'img/dogs/labrador/labrador_main.png',
+    size: 'large',
+    coat: 'short',
+    energy: 'low',
+    characteristics: `
+      The Labrador Retriever is one of the best breeds for families and can be an excellent breed for 
+      even an inexperienced dog owner. Known for their happy-go-lucky, easy-going personalities, 
+      these dogs are always up for adventure. They like to be included in all aspects of family life.`,
+    lifespan: '10 to 12 years',
+    colors: `
+      Labrador Retrievers come in solid black, chocolate, or yellow. 
+      The yellow varies from a pale cream to a rich red fox color. 
+      Some Labradors also have white chest blazes.`,
+  }),
+  new Animal({
+    name: 'Toyterrier',
+    id: 'Toyterrier',
+    mainImg: 'img/dogs/toyterrier/toyterrier_main.png',
+    size: 'small',
+    coat: 'short',
+    energy: 'high',
+    characteristics: `
+      Intelligent, affectionate, and outgoing, Toyterrier is a people-oriented breed that forms close 
+      family bonds. These easy-going dogs interact well with both children and elderly people. 
+      (Of course, all dogs should be supervised around kids to ensure safety.)`,
+    lifespan: '12 to 14 years',
+    colors: `
+      Toy's coat can be short (smooth, close-lying, and shiny) or long (soft, and wavy to curly). 
+      It may be black and tan, chocolate and tan, blue and tan, red, red sable, or red-brown. 
+      Small white markings and brindle are also possible, but the latter is disqualified by 
+      the breed standard.`,
+  }),
+  new Animal({
+    name: 'Spitz',
+    id: 'Spitz',
+    mainImg: 'img/dogs/spitz/spitz_main.png',
+    size: 'small',
+    coat: 'long',
+    energy: 'high',
+    characteristics: `
+      Spitz is an attentive, intelligent, and upbeat breed that makes an excellent companion. 
+      These adorable little bundles of energy have a spring in their steps and the stamina to keep up 
+      with their people—until it's time to curl up for a nap.`,
+    lifespan: '13 to 15 years',
+    colors: `
+      Their coats come in five primary colors: white, black, brown, orange, and grey-shaded. 
+      Other less common colors include cream, cream-sable, orange-sable, black, and tan. `,
+  }),
+]
+
+const rats = [
+  new Animal({
+    name: 'Standart',
+    id: 'Standart',
+    mainImg: 'img/rats/standart_main.png',
+    characteristics: `
+      A standard rat has a short coat with a smooth appearance and ears that sit on top of their head. 
+      Male standard rats have longer hair than females that may feel rougher to the touch and 
+      can be greasy.`,
+    lifespan: '2 to 3 years',
+    colors: `
+      Rats come in many different coat colors. 
+      There are 40 distinct colors, including beige, champagne, chocolate, platinum, black-eyed white, 
+      pink-eyed white, silver black, silver lilac, hooded, Dalmatian, and many more.`,
+  }),
+  new Animal({
+    name: 'Dumbo',
+    id: 'Dumbo',
+    mainImg: 'img/rats/dumbo_main.png',
+    characteristics: `
+      This rat variety gets their name from the Disney cartoon elephant Dumbo. 
+      They have large, round ears that are set lower on the head than standard, "top" ears.`,
+    lifespan: '2 to 3 years',
+    colors: `
+      There are two primary color types found in dumbo rats: agouti and black. 
+      Agouti means they have three different tones on each individual hair, 
+      which often combines to give them a gray or brownish coloring. 
+      However, agouti dumbos can also be found in cinnamon and fawn.`,
+  }),
+  new Animal({
+    name: 'Sphynx',
+    id: 'Sphynx',
+    mainImg: 'img/rats/sphynx_main.png',
+    characteristics: `
+      Hairless rats have been bred to be completely bald, although they often have some short curly fur 
+      around their whiskers, which are small and curly.`, 
+    lifespan: '1 to 3 years',
+    colors: `
+      The color of their skin will depend on the genes they have for fur color and markings. 
+      Pale colored hairless rats will be pink, while those with dark coloring will have black 
+      or grey areas of skin.`,
+  }),
+  new Animal({
+    name: 'Rex',
+    id: 'Rex',
+    mainImg: 'img/rats/rex_main.png',
+    characteristics: `
+      The rex rat has curly fur, somewhat like a Cornish Rex cat. 
+      They also have whiskers that look crumpled and wrinkled. 
+      A "double rex" rat has even curlier fur in smaller quantities, 
+      giving these rats a hairless appearance if viewed from far away.`,
+    lifespan: '2 to 3 years',
+    colors: `
+      Albino, blue, black, cream, platinum, buff, silver, sable, Siamese, fawn, gray`,
   }),
 ]
 
@@ -261,12 +413,36 @@ const rootCatBreeds = document.querySelector('.Cats .Breeds');
 const rootDogBreeds = document.querySelector('.Dogs .Breeds');
 const rootRatBreeds = document.querySelector('.Rats .Breeds');
 
-const rootFilterCats = document.querySelector('.Cats form');
-const rootFilterDogs = document.querySelector('.Dogs form');
-const rootFilterRats = document.querySelector('.Rats form');
+const rootFilterCats = document.querySelector('.Cats form .Filter-Controls');
+const rootFilterDogs = document.querySelector('.Dogs form .Filter-Controls');
+const rootFilterRats = document.querySelector('.Rats form .Filter-Controls');
+
+const animalsMapping = {
+  cats: {
+    list: cats,
+    state: new FilterState(),
+    filterKeys: Object.keys(new FilterState()),
+    breedsRoot: rootCatBreeds,
+    filtersRoot: rootFilterCats,
+  },
+  dogs: {
+    list: dogs,
+    state: new FilterState(),
+    filterKeys: Object.keys(new FilterState()),
+    breedsRoot: rootDogBreeds,
+    filtersRoot: rootFilterDogs,
+  },
+  rats: {
+    list: rats,
+    state: new FilterState(),
+    filterKeys: Object.keys(new FilterState()),
+    breedsRoot: rootRatBreeds,
+    filtersRoot: rootFilterRats,
+  },
+};
 
 
-function openAnimals(evt, animalName) {
+function openAnimals(evt, animalType) {
 
   const tabcontent = document.querySelectorAll('.Tabcontent');
   for (let animal of tabcontent) {
@@ -278,8 +454,10 @@ function openAnimals(evt, animalName) {
     link.classList.remove('active');
   }
 
-  document.getElementById(animalName).style.display = 'flex';
+  document.getElementById(animalType).style.display = 'flex';
   evt.currentTarget.classList.add('active');
+  toggleEmptyMessage(true);
+  clearFilter(animalType);
 }
 
 document.getElementById('defaultOpen').click();
@@ -294,7 +472,7 @@ function createAnimalTemplate(animal) {
   return `
     <div class="Breed ${animal.id}" id="${animal.id}" data-size="${animal.size}" 
       data-coat="${animal.coat}" data-energy="${animal.energy}">
-      <div class="Breed-Img"></div>
+      <img class="Breed-Img" src="${animal.mainImg}"/>
       <div class="Breed-Info">
         <p class="Breed-Name">${animal.name}</p>
         <button>
@@ -323,7 +501,7 @@ function createOptionTemplate(option) {
 }
 
 
-function createFilterTemplate(filterElem) {
+function createFilterTemplate(filterElem, animalType) {
   const options = filterElem.options.reduce((acc, curr) => {
     return `${acc}${createOptionTemplate(curr)}`
   }, '');
@@ -337,7 +515,7 @@ function createFilterTemplate(filterElem) {
         <img src="img/icons/arrow_open.svg">
       </div>
 
-      <select name="${filterElem.title}" id="${filterElem.title}" onchange="handleOnChange(event)">
+      <select name="${filterElem.title}" id="${filterElem.title}" onchange="handleOnChange(event, '${filterElem.title}', '${animalType}')">
         ${options}
       </select>
     </label>
@@ -369,120 +547,76 @@ function createFiltersOptions(animalsInfo, keys) {
 }
 
 
-function insertFilterTemplate(filterElems, root) {
+function insertFilterTemplate(filterElems, root, animalType) {
+  if (!root) return;
+
   const template = filterElems.reduce((acc, curr) => {
-    return `${acc}${createFilterTemplate(curr)}`;
+    return `${acc}${createFilterTemplate(curr, animalType)}`;
   }, '');
 
-  root.innerHTML = `
-    ${template}
-    ${root.innerHTML}
-  `;
+  root.innerHTML = template;
 }
 
 
-function insertFilter(animalsInfo, keys, root) {
-  const filterOptions = createFiltersOptions(animalsInfo, keys);
+function insertFilter(animalType) {
+  const { list, filterKeys, filtersRoot } = animalsMapping[animalType];
+  const filterOptions = createFiltersOptions(list, filterKeys);
 
-  insertFilterTemplate(filterOptions, root);
+  insertFilterTemplate(filterOptions, filtersRoot, animalType);
 }
 
 
 function handleChangeLableValue(event) {
-    const label = event.target.closest('label');
-    const selectValue = label.querySelector('.Select-Value');
+  const label = event.target.closest('label');
 
-    selectValue.innerHTML = event.target.options[event.target.selectedIndex].text;
+  const selectValue = label.querySelector('.Select-Value');
+
+  selectValue.innerHTML = event.target.options[event.target.selectedIndex].text;
 }
 
 
-function filterState(state, animal) {
-  let availableItems = 0;
+function filterState(state, animals) {
+  return animals.filter((item) => {
+    const isSizeFilterCorrect = item.size === state.size || state.size === SIZES.all;
+    const isCoatFilterCorrect = item.coat === state.coat || state.coat === COATS.all;
+    const isEnergyFilterCorrect = item.energy === state.energy || state.energy === ENERGIES.all;
 
-  const animalFiltered = [];
-
-  animal.forEach((item) => {
-    const isSizeFilterCorrect = item.size === currentState.size || currentState.size === SIZES.all;
-    const isCoatFilterCorrect = item.coat === currentState.coat || currentState.coat === COATS.all;
-    const isEnergyFilterCorrect = item.energy === currentState.energy || currentState.energy === ENERGIES.all;
-
-    if (isSizeFilterCorrect && isCoatFilterCorrect && isEnergyFilterCorrect) {
-      animalFiltered.push(item);
-      availableItems++;
-    } 
+    return isSizeFilterCorrect && isCoatFilterCorrect && isEnergyFilterCorrect;
   });
-
-  console.log('animal >>>', animal);
-
-  insertAnimalCards(animalFiltered, rootCatBreeds);
-
-  // let animalType = animal.parentNode;
-  // console.log('animalType >>>', animalType);
-
-
-  // if (animalType === 'cats') {
-  //   insertAnimalCards(animalFiltered, rootCatBreeds);
-  // } else if (animalType === 'dogs') {
-  //   insertAnimalCards(animalFiltered, rootDogBreeds);
-  // } else {
-  //   insertAnimalCards(animalFiltered, rootRatBreeds);
-  // }
-  
-  if (!availableItems) {
-    document.querySelector('.Message').style.display = 'flex';
-  } else {
-    document.querySelector('.Message').style.display = 'none';
-  }
 }
 
+function toggleEmptyMessage(shouldHide) {
+  const displayState = shouldHide ? 'none' : 'flex';
+  document.querySelector('.Message').style.display = displayState;
+}
 
-function handleOnChange(event) {
+function handleOnChange(event, stateName, animalType) {
   const selectedOption = event.target.options[event.target.selectedIndex];
-
-  const stateName = selectedOption.closest('select').id;
-  const animalCurr = (selectedOption.closest('.Tabcontent').id).toLowerCase();
-
-  console.log('animalCurr >>>', animalCurr);
-
-  currentState[stateName] = selectedOption.value;
-
-  filterState(currentState, cats);
+  
+  const { list, breedsRoot, state } = animalsMapping[animalType];
+  
+  state.set(stateName, selectedOption.value);
+  const filteredAnimals = filterState(state, list);
+  insertAnimalCards(filteredAnimals, breedsRoot);
+  toggleEmptyMessage(filteredAnimals.length);
   handleChangeLableValue(event);
 }
 
 
-function clearFilter(event) {
-  const globalSizeSelect = document.querySelector('#size');
-  const globalCoatSelect = document.querySelector('#coat');
-  const globalEnergySelect = document.querySelector('#energy');
-  
-  const globalSizeSelectValue = document.querySelector('.FilterOption-Size .Select-Value');
-  const globalCoatSelectValue = document.querySelector('.FilterOption-Coat .Select-Value');
-  const globalEnergySelectValue = document.querySelector('.FilterOption-Energy .Select-Value');
+function clearFilter(animalType) {
+  const { state, list, breedsRoot, filtersRoot } = animalsMapping[animalType];
+  state.reset();
 
-  globalSizeSelect.value = 'all';
-  globalCoatSelect.value = 'all';
-  globalEnergySelect.value = 'all';
-
-  globalSizeSelectValue.innerHTML = 'All sizes';
-  globalCoatSelectValue.innerHTML = 'All coat';
-  globalEnergySelectValue.innerHTML = 'All energy';
-
-  currentState.size = 'all';
-  currentState.coat = 'all';
-  currentState.energy = 'all';
-
-  insertAnimalCards(cats, rootCatBreeds);
-  document.querySelector('.Message').style.display = 'none';
+  insertAnimalCards(list, breedsRoot);
+  insertFilter(animalType);
+  toggleEmptyMessage(true);
 }
-
 
 
 insertAnimalCards(cats, rootCatBreeds);
 insertAnimalCards(dogs, rootDogBreeds);
-// insertAnimalCards(rats, rootRatBreeds);
+insertAnimalCards(rats, rootRatBreeds);
 
 
-insertFilter(cats, ['size', 'coat', 'energy'], rootFilterCats);
-insertFilter(dogs, ['size', 'coat', 'energy'], rootFilterDogs);
-// insertFilter(rats, rootFilterRats);
+insertFilter(ANIMAL_TYPES.cats);
+insertFilter(ANIMAL_TYPES.dogs);

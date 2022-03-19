@@ -157,6 +157,10 @@ h1 {
   align-items: flex-end;
 }
 
+.Filter-Controls {
+  display: flex;
+}
+
 .FilterOption {
   width: 192px;
   height: auto;
@@ -256,51 +260,6 @@ h1 {
   margin-right: 12px;
 }
 
-.Tabcontent-Cats .Bengal .Breed-Img {
-  background-image: url('img/cats/bengal/bengal_main.jpeg');
-  background-position: -30px 0px;
-}
-
-.Tabcontent-Cats .MainCoon .Breed-Img {
-  background-image: url('img/cats/mainCoon/mainCoon_main.jpeg');
-}
-
-.Tabcontent-Cats .Siamese .Breed-Img {
-  background-image: url('img/cats/siameseCat/siameseCat_main.jpeg');
-  background-position: 10px;
-}
-
-.Tabcontent-Cats .Abyssinian .Breed-Img {
-  background-image: url('img/cats/abyssinian/abyssinian_main.jpeg');
-  background-position: -50px 0px;
-}
-
-.Tabcontent-Cats .BritishShorthair .Breed-Img {
-  background-image: url('img/cats/britishShorthair/britishShorthair_main.jpeg');
-  background-position: 0px -10px;
-}
-
-.Tabcontent-Cats .Sphynx .Breed-Img {
-  background-image: url('img/cats/sphynx/sphynx_main.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 50% 5px;
-}
-
-.Tabcontent-Cats .AmericanShorthair .Breed-Img {
-  background-image: url('img/cats/americanShorthair/americanShorthair_main.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 50% 5px;
-}
-
-.Tabcontent-Cats .CornishRex .Breed-Img {
-  background-image: url('img/cats/cornishRex/cornishRex_main.jpeg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 50%;
-}
-
 .Message {
   font: var(--font-h2);
   font-weight: 500;
@@ -310,7 +269,7 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 48px auto;
+  margin: 0px auto;
 }
 
 .Message p:not(:last-child) {

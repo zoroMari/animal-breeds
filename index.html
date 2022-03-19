@@ -26,64 +26,54 @@
       <h1>Most popular breeds of our pets</h1>
 
       <div class="Tabs">
-        <button class="Tablinks" onclick="openAnimals(event, 'Cats')" id="defaultOpen">Cats</button>
-        <button class="Tablinks" onclick="openAnimals(event, 'Dogs')">Dogs</button>
-        <button class="Tablinks" onclick="openAnimals(event, 'Rats')">Rats</button>
+        <button class="Tablinks" onclick="openAnimals(event, ANIMAL_TYPES.cats)" id="defaultOpen">Cats</button>
+        <button class="Tablinks" onclick="openAnimals(event, ANIMAL_TYPES.dogs)">Dogs</button>
+        <button class="Tablinks" onclick="openAnimals(event, ANIMAL_TYPES.rats)">Rats</button>
       </div>
 
-      <section class="Tabcontent Tabcontent-Cats Cats" id="Cats">
+      <section class="Tabcontent Tabcontent-Cats Cats" id="cats">
         <p class="Text Cats-Text"> 
           Thinking about getting a cat but not sure which breed is right for you? We can help.
         </p>
 
         <form class="Filter Cats-Filter" name="filterCat" onsubmit="event.preventDefault()">
-          <button class="Clear" onclick="clearFilter(event)">Clear filter</button>
+          <div class="Filter-Controls"></div>
+          <button class="Clear" onclick="clearFilter(ANIMAL_TYPES.cats)">Clear filter</button>
         </form>
-
-        <div class="Message"> 
-          <p>There is not such breed.</p> 
-          <p> Please, change filter conditions.</p>
-        </div>
 
         <section class="Cats-Breeds Breeds">
         </section>
       </section>
 
 
-      <section class="Tabcontent Tabcontent-Dogs Dogs" id="Dogs">
-
-        <!-- <div class="CommingSoon"> 
-          <p>Dogs coming very soon!</p> 
-        </div> -->
-
+      <section class="Tabcontent Tabcontent-Dogs Dogs" id="dogs">
         <p class="Text Dogs-Text"> 
           Thinking about getting a dog but not sure which breed is right for you? We can help.
         </p>
 
         <form class="Filter Dogs-Filter" name="filterDog" onsubmit="event.preventDefault()">
-          <button class="Clear" onclick="clearFilter(event)">Clear filter</button>
+          <div class="Filter-Controls"></div>
+          <button class="Clear" onclick="clearFilter(ANIMAL_TYPES.dogs)">Clear filter</button>
         </form>
-
-        <div class="Message"> 
-          <p>There is not such breed.</p> 
-          <p> Please, change filter conditions.</p>
-        </div>
 
         <section class="Dogs-Breeds Breeds">
         </section>
       </section>
 
 
-      <section class="Tabcontent Tabcontent-Rats Rats" id="Rats">
-
-        <div class="CommingSoon"> 
-          <p>Rats coming very soon!</p> 
-        </div>
+      <section class="Tabcontent Tabcontent-Rats Rats" id="rats">
+        <p class="Text Rats-Text"> 
+          Thinking about getting a rat but not sure which breed is right for you? We can help.
+        </p>
 
         <section class="Rats-Breeds Breeds">
         </section>
       </section>
 
+      <div class="Message"> 
+        <p>There is not such breed.</p> 
+        <p> Please, change filter conditions.</p>
+      </div>
       
       <section class="Popup"></section>
     </main>
