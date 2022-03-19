@@ -9,7 +9,7 @@ const COATS = {
   all: 'all',
   short: 'short',
   medium: 'medium',
-  large: 'long',
+  long: 'long',
 };
 
 const ENERGIES = {
@@ -77,7 +77,7 @@ const cats = [
     id: 'Bengal',
     mainImg: 'img/cats/bengal/bengal_main.png',
     size: SIZES.large,
-    coat: 'medium',
+    coat: COATS.medium,
     energy: 'high',
     characteristics: `
       Bengal Cats have an athletic appearance with well-defined muscles, 
@@ -96,9 +96,9 @@ const cats = [
     name: 'Main Coon',
     id: 'MainCoon',
     mainImg: 'img/cats/mainCoon/mainCoon_main.png',
-    size: 'large',
-    coat: 'long',
-    energy: 'medium',
+    size: SIZES.large,
+    coat: COATS.long,
+    energy: ENERGIES.medium,
     characteristics: `
       The most recognizable characteristics of adult Maine Coon cats are their large size and long, 
       bushy tail. Their paws are big and well-tufted to be suitable for walking in snow, as can be 
@@ -115,9 +115,9 @@ const cats = [
     name: 'Siamese',
     id: 'Siamese',
     mainImg: 'img/cats/siameseCat/siameseCat_main.png',
-    size: 'large',
-    coat: 'medium',
-    energy: 'high',
+    size: SIZES.large,
+    coat: COATS.medium,
+    energy: ENERGIES.high,
     characteristics: `
       This highly intelligent feline will seek out things to occupy her mind. So if you don’t want 
       your cat getting into mischief, give her puzzle feeders, games and more to keep her entertained.
@@ -138,9 +138,9 @@ const cats = [
     name: 'Abyssinian',
     id: 'Abyssinian',
     mainImg: 'img/cats/abyssinian/abyssinian_main.png',
-    size: 'small',
-    coat: 'medium',
-    energy: 'high',
+    size: SIZES.small,
+    coat: COATS.medium,
+    energy: ENERGIES.high,
     characteristics: `
       Seemingly always in motion, she’ll slow down occasionally to curl up next to you on the couch 
       or in bed. Although independent, she does best with another Aby companion to match her 
@@ -162,9 +162,9 @@ const cats = [
     name: 'British Shorthair',
     id: 'BritishShorthair',
     mainImg: 'img/cats/britishShorthair/britishShorthair_main.png',
-    size: 'large',
-    coat: 'short',
-    energy: 'low',
+    size: SIZES.large,
+    coat: COATS.short,
+    energy: ENERGIES.low,
     characteristics: `
       British Shorthairs are round all over, with a broad chest and strong legs. 
       Their coats are short, thick and plush. Eye color depends on coat color, but you can expect 
@@ -180,9 +180,9 @@ const cats = [
     name: 'Sphynx',
     id: 'Sphynx',
     mainImg: 'img/cats/sphynx/sphynx_main.png',
-    size: 'small',
-    coat: 'short',
-    energy: 'high',
+    size: SIZES.small,
+    coat: COATS.short,
+    energy: ENERGIES.high,
     characteristics: `
       The most striking characteristic of the Sphynx is of course her hairlessness, 
       which exposes her warm, chamois like skin for the world to see, touch and enjoy. 
@@ -197,9 +197,9 @@ const cats = [
     name: 'American Shorthair',
     id: 'AmericanShorthair',
     mainImg: 'img/cats/americanShorthair/americanShorthair_main.png',
-    size: 'large',
-    coat: 'short',
-    energy: 'medium',
+    size: SIZES.large,
+    coat: COATS.short,
+    energy: ENERGIES.medium,
     characteristics: `
       As a working cat, American Shorthairs have a stocky, muscular build. Their muscular legs 
       lend themselves to the American’s agility and endurance. They have a large head and full face, 
@@ -213,9 +213,9 @@ const cats = [
     name: 'Cornish Rex',
     id: 'CornishRex',
     mainImg: 'img/cats/cornishRex/cornishRex_main.png',
-    size: 'small',
-    coat: 'short',
-    energy: 'high',
+    size: SIZES.small,
+    coat: COATS.short,
+    energy: ENERGIES.high,
     characteristics: `
       Bat-eared, big-eyed and wavy-coated, the Cornish Rex has a distinctive look and exceptionally 
       silky coat due to not having guard hairs like other breeds. This active cat has a small, 
@@ -234,9 +234,9 @@ const dogs = [
     name: 'Husky',
     id: 'Husky',
     mainImg: 'img/dogs/husky/husky_main.png',
-    size: 'large',
-    coat: 'medium',
-    energy: 'medium',
+    size: SIZES.large,
+    coat: COATS.medium,
+    energy: ENERGIES.medium,
     characteristics: `
       Huskies are excellent with children and usually friendly to everyone, 
       making them fantastic family dogs. However, this love of people means 
@@ -252,9 +252,9 @@ const dogs = [
     name: 'Pug',
     id: 'Pug',
     mainImg: 'img/dogs/mops/mops_main.png',
-    size: 'small',
-    coat: 'short',
-    energy: 'low',
+    size: SIZES.small,
+    coat: COATS.short,
+    energy: ENERGIES.low,
     characteristics: `
       Pugs are even-tempered, outgoing, loving, and affectionate—all of which make them popular 
       with families. The breed is known for being both calm and playful. 
@@ -269,9 +269,9 @@ const dogs = [
     name: 'Corgi',
     id: 'Corgi',
     mainImg: 'img/dogs/corgi/corgi_main.png',
-    size: 'small',
-    coat: 'short',
-    energy: 'medium',
+    size: SIZES.small,
+    coat: COATS.short,
+    energy: ENERGIES.medium,
     characteristics: `
       Corgis are active, affectionate dogs. Despite having short legs, these canines are quick and agile. 
       Corgis adore their families and are generally great with other pets and children. 
@@ -287,9 +287,9 @@ const dogs = [
     name: 'Jagdterrier',
     id: 'Jagdterrier',
     mainImg: 'img/dogs/jagdterrier/jagdterrier_main.png',
-    size: 'medium',
-    coat: 'short',
-    energy: 'high',
+    size: SIZES.medium,
+    coat: COATS.short,
+    energy: ENERGIES.high,
     characteristics: `
       The Jagdterrier is courageous, enduring, vital, full of temperament, reliable, 
       sociable and trainable. He always takes pleasure in his work. 
@@ -303,9 +303,9 @@ const dogs = [
     name: 'Labrador Retrievers',
     id: 'Labrador',
     mainImg: 'img/dogs/labrador/labrador_main.png',
-    size: 'large',
-    coat: 'short',
-    energy: 'low',
+    size: SIZES.large,
+    coat: COATS.short,
+    energy: ENERGIES.low,
     characteristics: `
       The Labrador Retriever is one of the best breeds for families and can be an excellent breed for 
       even an inexperienced dog owner. Known for their happy-go-lucky, easy-going personalities, 
@@ -320,9 +320,9 @@ const dogs = [
     name: 'Toyterrier',
     id: 'Toyterrier',
     mainImg: 'img/dogs/toyterrier/toyterrier_main.png',
-    size: 'small',
-    coat: 'short',
-    energy: 'high',
+    size: SIZES.small,
+    coat: COATS.short,
+    energy: ENERGIES.high,
     characteristics: `
       Intelligent, affectionate, and outgoing, Toyterrier is a people-oriented breed that forms close 
       family bonds. These easy-going dogs interact well with both children and elderly people. 
@@ -338,9 +338,9 @@ const dogs = [
     name: 'Spitz',
     id: 'Spitz',
     mainImg: 'img/dogs/spitz/spitz_main.png',
-    size: 'small',
-    coat: 'long',
-    energy: 'high',
+    size: SIZES.small,
+    coat: COATS.long,
+    energy: ENERGIES.high,
     characteristics: `
       Spitz is an attentive, intelligent, and upbeat breed that makes an excellent companion. 
       These adorable little bundles of energy have a spring in their steps and the stamina to keep up 
@@ -357,6 +357,9 @@ const rats = [
     name: 'Standart',
     id: 'Standart',
     mainImg: 'img/rats/standart_main.png',
+    size: SIZES.small,
+    coat: COATS.short,
+    energy: ENERGIES.high,
     characteristics: `
       A standard rat has a short coat with a smooth appearance and ears that sit on top of their head. 
       Male standard rats have longer hair than females that may feel rougher to the touch and 
@@ -371,6 +374,9 @@ const rats = [
     name: 'Dumbo',
     id: 'Dumbo',
     mainImg: 'img/rats/dumbo_main.png',
+    size: SIZES.small,
+    coat: COATS.short,
+    energy: ENERGIES.high,
     characteristics: `
       This rat variety gets their name from the Disney cartoon elephant Dumbo. 
       They have large, round ears that are set lower on the head than standard, "top" ears.`,
@@ -385,6 +391,9 @@ const rats = [
     name: 'Sphynx',
     id: 'Sphynx',
     mainImg: 'img/rats/sphynx_main.png',
+    size: SIZES.small,
+    coat: COATS.short,
+    energy: ENERGIES.high,
     characteristics: `
       Hairless rats have been bred to be completely bald, although they often have some short curly fur 
       around their whiskers, which are small and curly.`, 
@@ -398,6 +407,9 @@ const rats = [
     name: 'Rex',
     id: 'Rex',
     mainImg: 'img/rats/rex_main.png',
+    size: SIZES.small,
+    coat: COATS.short,
+    energy: ENERGIES.high,
     characteristics: `
       The rex rat has curly fur, somewhat like a Cornish Rex cat. 
       They also have whiskers that look crumpled and wrinkled. 
@@ -415,7 +427,7 @@ const rootRatBreeds = document.querySelector('.Rats .Breeds');
 
 const rootFilterCats = document.querySelector('.Cats form .Filter-Controls');
 const rootFilterDogs = document.querySelector('.Dogs form .Filter-Controls');
-const rootFilterRats = document.querySelector('.Rats form .Filter-Controls');
+
 
 const animalsMapping = {
   cats: {
@@ -435,9 +447,7 @@ const animalsMapping = {
   rats: {
     list: rats,
     state: new FilterState(),
-    filterKeys: Object.keys(new FilterState()),
     breedsRoot: rootRatBreeds,
-    filtersRoot: rootFilterRats,
   },
 };
 
@@ -515,7 +525,8 @@ function createFilterTemplate(filterElem, animalType) {
         <img src="img/icons/arrow_open.svg">
       </div>
 
-      <select name="${filterElem.title}" id="${filterElem.title}" onchange="handleOnChange(event, '${filterElem.title}', '${animalType}')">
+      <select name="${filterElem.title}" id="${filterElem.title}" 
+        onchange="handleOnChange(event, '${filterElem.title}', '${animalType}')">
         ${options}
       </select>
     </label>
@@ -523,27 +534,51 @@ function createFilterTemplate(filterElem, animalType) {
 }
 
 
-function createFiltersOptions(animalsInfo, keys) {
-  if (!animalsInfo || !keys) throw new Error('Please, provide both: input list and necessary keys');
+// function createFiltersOptions_old(animalsInfo, keys) {
+//   if (!animalsInfo || !keys) throw new Error('Please, provide both: input list and necessary keys');
 
-  const filtersMap = keys.reduce((acc, curr) => ({
-    ...acc,
-    [curr]: { title: curr, options: [{ value: 'all', name: `All ${curr}` }] },
-  }), { });
+//   const filtersMap = keys.reduce((acc, curr) => ({
+//     ...acc,
+//     [curr]: { title: curr, options: [{ value: 'all', name: `All ${curr}` }] },
+//   }), { });
 
-  animalsInfo.forEach((item) => {
-    keys.forEach((key) => {
-      if (!item[key]) return;
+//   animalsInfo.forEach((item) => {
+//     keys.forEach((key) => {
+//       if (!item[key]) return;
 
-      const isOptionInList = filtersMap[key].options.find((option) => option.value === item[key]);
-      if (isOptionInList) return;
+//       const isOptionInList = filtersMap[key].options.find((option) => option.value === item[key]);
+//       if (isOptionInList) return;
 
-      filtersMap[key].options.push({ value: item[key], name: capitalize(item[key]) });
-    })
+//       filtersMap[key].options.push({ value: item[key], name: capitalize(item[key]) });
+//     })
 
+//   });
+
+//   return Object.values(filtersMap).filter((item) => item.options.length > 1);
+// }
+
+
+function createFilterOptions(title, availableOptionsMap) {
+  const options = Object.keys(availableOptionsMap).map((key) => {
+    const name = key === 'all' 
+      ? `${capitalize(availableOptionsMap[key])} ${title}` 
+      : capitalize(availableOptionsMap[key]);
+    return {
+      name,
+      value: availableOptionsMap[key],
+    };
   });
 
-  return Object.values(filtersMap).filter((item) => item.options.length > 1);
+  return { title, options };
+}
+
+
+function createFiltersOptionsArray() {
+  return [
+    createFilterOptions('size', SIZES),
+    createFilterOptions('coat', COATS),
+    createFilterOptions('energy', ENERGIES),
+  ]
 }
 
 
@@ -560,7 +595,10 @@ function insertFilterTemplate(filterElems, root, animalType) {
 
 function insertFilter(animalType) {
   const { list, filterKeys, filtersRoot } = animalsMapping[animalType];
-  const filterOptions = createFiltersOptions(list, filterKeys);
+
+  if (!list || !filterKeys || !filtersRoot) return;
+
+  const filterOptions = createFiltersOptionsArray();
 
   insertFilterTemplate(filterOptions, filtersRoot, animalType);
 }
@@ -585,10 +623,12 @@ function filterState(state, animals) {
   });
 }
 
+
 function toggleEmptyMessage(shouldHide) {
   const displayState = shouldHide ? 'none' : 'flex';
   document.querySelector('.Message').style.display = displayState;
 }
+
 
 function handleOnChange(event, stateName, animalType) {
   const selectedOption = event.target.options[event.target.selectedIndex];
@@ -613,10 +653,13 @@ function clearFilter(animalType) {
 }
 
 
-insertAnimalCards(cats, rootCatBreeds);
-insertAnimalCards(dogs, rootDogBreeds);
-insertAnimalCards(rats, rootRatBreeds);
+function startFunctions() {
+  insertAnimalCards(animalsMapping.cats.list, animalsMapping.cats.breedsRoot);
+  insertAnimalCards(animalsMapping.dogs.list, animalsMapping.dogs.breedsRoot);
+  insertAnimalCards(animalsMapping.rats.list, animalsMapping.rats.breedsRoot);
+  
+  insertFilter(ANIMAL_TYPES.cats);
+  insertFilter(ANIMAL_TYPES.dogs);
+}
 
-
-insertFilter(ANIMAL_TYPES.cats);
-insertFilter(ANIMAL_TYPES.dogs);
+startFunctions();
