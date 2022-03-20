@@ -49,6 +49,7 @@ class FilterState {
 
 class Animal {
   constructor({
+    type,
     name,
     id,
     mainImg,
@@ -59,6 +60,7 @@ class Animal {
     lifespan,
     colors,
   }) {
+    this.type = type;
     this.name = name;
     this.id = id;
     this.mainImg = mainImg;
@@ -73,6 +75,7 @@ class Animal {
 
 const cats = [
   new Animal({
+    type: 'cat',
     name: 'Bengal',
     id: 'Bengal',
     mainImg: 'img/cats/bengal/bengal_main.png',
@@ -93,6 +96,7 @@ const cats = [
   }),
 
   new Animal({
+    type: 'cat',
     name: 'Main Coon',
     id: 'MainCoon',
     mainImg: 'img/cats/mainCoon/mainCoon_main.png',
@@ -112,6 +116,7 @@ const cats = [
   }),
 
   new Animal({
+    type: 'cat',
     name: 'Siamese',
     id: 'Siamese',
     mainImg: 'img/cats/siameseCat/siameseCat_main.png',
@@ -135,6 +140,7 @@ const cats = [
   }),
 
   new Animal({
+    type: 'cat',
     name: 'Abyssinian',
     id: 'Abyssinian',
     mainImg: 'img/cats/abyssinian/abyssinian_main.png',
@@ -159,6 +165,7 @@ const cats = [
   }),
 
   new Animal({
+    type: 'cat',
     name: 'British Shorthair',
     id: 'BritishShorthair',
     mainImg: 'img/cats/britishShorthair/britishShorthair_main.png',
@@ -177,6 +184,7 @@ const cats = [
   }),
 
   new Animal({
+    type: 'cat',
     name: 'Sphynx',
     id: 'Sphynx',
     mainImg: 'img/cats/sphynx/sphynx_main.png',
@@ -194,6 +202,7 @@ const cats = [
   }),
 
   new Animal({
+    type: 'cat',
     name: 'American Shorthair',
     id: 'AmericanShorthair',
     mainImg: 'img/cats/americanShorthair/americanShorthair_main.png',
@@ -210,6 +219,7 @@ const cats = [
   }),
 
   new Animal({
+    type: 'cat',
     name: 'Cornish Rex',
     id: 'CornishRex',
     mainImg: 'img/cats/cornishRex/cornishRex_main.png',
@@ -231,6 +241,7 @@ const cats = [
 
 const dogs = [
   new Animal({
+    type: 'dog',
     name: 'Husky',
     id: 'Husky',
     mainImg: 'img/dogs/husky/husky_main.png',
@@ -249,6 +260,7 @@ const dogs = [
   }),
 
   new Animal({
+    type: 'dog',
     name: 'Pug',
     id: 'Pug',
     mainImg: 'img/dogs/mops/mops_main.png',
@@ -266,6 +278,7 @@ const dogs = [
       the back of the skull to the tail).`,
   }),
   new Animal({
+    type: 'dog',
     name: 'Corgi',
     id: 'Corgi',
     mainImg: 'img/dogs/corgi/corgi_main.png',
@@ -284,6 +297,7 @@ const dogs = [
       But white should never be the predominant color.`,
   }),
   new Animal({
+    type: 'dog',
     name: 'Jagdterrier',
     id: 'Jagdterrier',
     mainImg: 'img/dogs/jagdterrier/jagdterrier_main.png',
@@ -300,6 +314,7 @@ const dogs = [
       His coat is usually black and tan, but can be dark brown or grayish-black as well.`,
   }),
   new Animal({
+    type: 'dog',
     name: 'Labrador Retrievers',
     id: 'Labrador',
     mainImg: 'img/dogs/labrador/labrador_main.png',
@@ -317,6 +332,7 @@ const dogs = [
       Some Labradors also have white chest blazes.`,
   }),
   new Animal({
+    type: 'dog',
     name: 'Toyterrier',
     id: 'Toyterrier',
     mainImg: 'img/dogs/toyterrier/toyterrier_main.png',
@@ -335,6 +351,7 @@ const dogs = [
       the breed standard.`,
   }),
   new Animal({
+    type: 'dog',
     name: 'Spitz',
     id: 'Spitz',
     mainImg: 'img/dogs/spitz/spitz_main.png',
@@ -354,6 +371,7 @@ const dogs = [
 
 const rats = [
   new Animal({
+    type: 'rat',
     name: 'Standart',
     id: 'Standart',
     mainImg: 'img/rats/standart_main.png',
@@ -371,6 +389,7 @@ const rats = [
       pink-eyed white, silver black, silver lilac, hooded, Dalmatian, and many more.`,
   }),
   new Animal({
+    type: 'rat',
     name: 'Dumbo',
     id: 'Dumbo',
     mainImg: 'img/rats/dumbo_main.png',
@@ -388,6 +407,7 @@ const rats = [
       However, agouti dumbos can also be found in cinnamon and fawn.`,
   }),
   new Animal({
+    type: 'rat',
     name: 'Sphynx',
     id: 'Sphynx',
     mainImg: 'img/rats/sphynx_main.png',
@@ -404,6 +424,7 @@ const rats = [
       or grey areas of skin.`,
   }),
   new Animal({
+    type: 'rat',
     name: 'Rex',
     id: 'Rex',
     mainImg: 'img/rats/rex_main.png',
@@ -427,6 +448,8 @@ const rootRatBreeds = document.querySelector('.Rats .Breeds');
 
 const rootFilterCats = document.querySelector('.Cats form .Filter-Controls');
 const rootFilterDogs = document.querySelector('.Dogs form .Filter-Controls');
+
+const popupRoot = document.querySelector('.Popup');
 
 
 const animalsMapping = {
@@ -485,7 +508,7 @@ function createAnimalTemplate(animal) {
       <img class="Breed-Img" src="${animal.mainImg}"/>
       <div class="Breed-Info">
         <p class="Breed-Name">${animal.name}</p>
-        <button>
+        <button onclick="handleOpenPopup(event, '${animal.id}', popupRoot)">
           <p>Learn more</p>
           <img src="img/icons/learnMore.svg">
         </button>
@@ -651,6 +674,100 @@ function clearFilter(animalType) {
   insertFilter(animalType);
   toggleEmptyMessage(true);
 }
+
+
+function createPopupTemplate(animal) {
+  return `
+    <img class="Close" src="img/icons/close.svg" onclick="handleClosePopup(popupRoot)"/>
+
+    <div class="Popup-Info" id="popup${animal.id}">
+      <div class="Popup-Header">  
+        <h1>${animal.name}</h1>
+        <button class="Add"><img src="img/icons/heart.svg"/><p>Add to Favorites</p></button>
+        <button class="Remove Button_hidden"><img src="img/icons/heart_solid.svg"/><p>Remove from Favorites</p></button>
+      </div>
+      <img class="Popup-Img" src="${animal.mainImg}"/>
+
+      <table>
+        <tr>
+          <td>
+            <p class="Name">size:</p>
+            <p class="Value">${capitalize(animal.size)}</p>
+          </td>
+          <td>
+            <p class="Name">coat:</p>
+            <p class="Value">${capitalize(animal.coat)}</p>
+          </td>
+          <td>
+            <p class="Name">energy:</p>
+            <p class="Value">${capitalize(animal.energy)}</p>
+          </td>
+        </tr>
+      </table>
+
+      <div class="AllInfo">
+        <div class="InfoBlock">
+          <h2>Characteristics:</h2>
+          <p>${animal.characteristics}</p>
+        </div>
+        <div class="InfoBlock">
+          <h2>Colors:</h2>
+          <p>${animal.colors}</p>
+        </div>
+        <div class="InfoBlock">
+          <h2>Lifespan:</h2>
+          <p>${animal.lifespan}</p>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+
+function showPopup(popup) {
+  popup.classList.add('Popup_active');
+  document.documentElement.style.overflowY = 'hidden';
+}
+
+
+function insertPopup(animalId, root) {
+  const animal = Object
+    .values(animalsMapping) 
+    .map((item) => item.list) 
+    .reduce((acc, curr) => acc.concat(curr), []) 
+    .find((item) => item.id === animalId);
+
+  const template = createPopupTemplate(animal);
+  root.innerHTML = template;
+    
+  showPopup(root);
+}
+
+
+function handleOpenPopup(_event, animalId, root) {
+  insertPopup(animalId, root);
+}
+
+
+function handleClosePopup(popup) {
+  popup.classList.remove('Popup_active');
+  document.documentElement.style.overflowY = '';
+}
+
+function isPopupOpen(popup) {
+  return popup.classList.contains('Popup_active');
+}
+
+
+function handleClosePopupByEsc(event) {
+  if (!isPopupOpen(popupRoot)) return;
+
+  if (event.code === 'Escape') {
+    handleClosePopup(popupRoot);
+  }
+}
+
+document.addEventListener('keydown', handleClosePopupByEsc);
 
 
 function startFunctions() {
