@@ -192,6 +192,7 @@ h1 {
 }
 
 .FilterOption select {
+  cursor: pointer;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -249,6 +250,7 @@ h1 {
 }
 
 .Breed button {
+  cursor: pointer;
   display: flex;
   align-items: center;
   font: var(--font-button);
@@ -277,19 +279,6 @@ h1 {
   color: var(--color-black);
 }
 
-.CommingSoon {
-  font: var(--font-h2);
-  font-weight: 500;
-  color: var(--color-black);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 48px auto;
-}
-
-
 
 .Background {
   width: 100%;
@@ -300,4 +289,150 @@ h1 {
   top: 0;
   left: 0;
   display: none;
+}
+
+
+.Popup {
+  position: fixed;
+  padding: 64px;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #333333e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  z-index: -1;
+  transition: all 250ms;
+}
+
+.Popup_active {
+  opacity: 1;
+  z-index: 100;
+}
+
+.Popup-Info {
+  width: 1000px;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 64px;
+  background-color: var(--color-grey_light);
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 1440px) {
+  .Popup-Info {
+    width: 600px;
+  }  
+}
+
+.Popup-Header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Popup-Header h1{
+  margin: 0;
+}
+
+.Popup-Header button{
+  display: flex;
+  align-items: center;
+}
+
+.Popup-Header button p{
+  font: var(--font-button);
+  color: var(--color-main);
+  font-weight: 700;
+  margin-left: 12px;
+}
+
+.Popup-Header .Add p{
+  color: var(--color-main);
+  border-bottom: var(--color-main) solid 1px;
+}
+
+.Popup-Header .Remove p{
+  color: var(--color-red);
+  border-bottom: var(--color-red) solid 1px;
+}
+
+.Popup-Header .Button_hidden {
+  display: none;
+}
+
+.Popup-Img {
+  width: 558px;
+  height: auto;
+  margin: 48px auto;
+  border-radius: 25px;
+}  
+
+.Popup .AllInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 48px;
+}
+
+.Popup .InfoBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--color-black);
+  font: var(--font-body_regular);
+}
+
+.Popup .InfoBlock:not(:last-child) {
+  margin-bottom: 48px;
+}
+
+.Popup .InfoBlock h2 {
+  font: var(--font-h2);
+  margin-bottom: 16px;
+}
+
+.Popup table {
+  width: 100%;
+  height: auto;
+  border: #33333333 solid 1px;
+  border-radius: 8px;
+}
+
+.Popup table tr{
+  display: flex;
+}
+
+.Popup table td {
+  padding: 24px 32px;
+  width: 100%;
+}
+
+.Popup table td:not(:last-child) {
+  border-right: #33333333 solid 1px;
+}
+
+.Popup td .Name {
+  font: var(--font-h2);
+  color: var(--color-black);
+  margin-bottom: 16px;
+}
+
+.Popup td .Value {
+  font: 32px/39px var(--font-family);
+  font-weight: 500;
+  color: var(--color-main);
+}
+
+.Popup .Close {
+  cursor: pointer;
+  position: fixed;
+  top: 24px;
+  right: 24px;
 }
