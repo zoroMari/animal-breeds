@@ -49,9 +49,10 @@ class FilterState {
 
 class Animal {
   constructor({
+    id,
     type,
     name,
-    id,
+    breed,
     mainImg,
     size,
     coat,
@@ -60,9 +61,10 @@ class Animal {
     lifespan,
     colors,
   }) {
+    this.id = id;
     this.type = type;
     this.name = name;
-    this.id = id;
+    this.breed = breed;
     this.mainImg = mainImg;
     this.size = size;
     this.coat = coat;
@@ -75,9 +77,10 @@ class Animal {
 
 const cats = [
   new Animal({
+    id: 'bengal_cat',
     type: 'cat',
     name: 'Bengal',
-    id: 'Bengal',
+    breed: 'Bengal',
     mainImg: 'img/cats/bengal/bengal_main.png',
     size: SIZES.large,
     coat: COATS.medium,
@@ -96,9 +99,10 @@ const cats = [
   }),
 
   new Animal({
+    id: 'mainCoon_cat',
     type: 'cat',
     name: 'Main Coon',
-    id: 'MainCoon',
+    breed: 'MainCoon',
     mainImg: 'img/cats/mainCoon/mainCoon_main.png',
     size: SIZES.large,
     coat: COATS.long,
@@ -116,9 +120,10 @@ const cats = [
   }),
 
   new Animal({
+    id: 'siamese_cat',
     type: 'cat',
     name: 'Siamese',
-    id: 'Siamese',
+    breed: 'Siamese',
     mainImg: 'img/cats/siameseCat/siameseCat_main.png',
     size: SIZES.large,
     coat: COATS.medium,
@@ -140,9 +145,10 @@ const cats = [
   }),
 
   new Animal({
+    id: 'abyssinian_cat',
     type: 'cat',
     name: 'Abyssinian',
-    id: 'Abyssinian',
+    breed: 'Abyssinian',
     mainImg: 'img/cats/abyssinian/abyssinian_main.png',
     size: SIZES.small,
     coat: COATS.medium,
@@ -165,9 +171,10 @@ const cats = [
   }),
 
   new Animal({
+    id: 'britishShorthair_cat',
     type: 'cat',
     name: 'British Shorthair',
-    id: 'BritishShorthair',
+    breed: 'BritishShorthair',
     mainImg: 'img/cats/britishShorthair/britishShorthair_main.png',
     size: SIZES.large,
     coat: COATS.short,
@@ -184,9 +191,10 @@ const cats = [
   }),
 
   new Animal({
+    id: 'sphynx_cat',
     type: 'cat',
     name: 'Sphynx',
-    id: 'Sphynx',
+    breed: 'Sphynx',
     mainImg: 'img/cats/sphynx/sphynx_main.png',
     size: SIZES.small,
     coat: COATS.short,
@@ -202,9 +210,10 @@ const cats = [
   }),
 
   new Animal({
+    id: 'americanShorthair_cat',
     type: 'cat',
     name: 'American Shorthair',
-    id: 'AmericanShorthair',
+    breed: 'AmericanShorthair',
     mainImg: 'img/cats/americanShorthair/americanShorthair_main.png',
     size: SIZES.large,
     coat: COATS.short,
@@ -219,9 +228,10 @@ const cats = [
   }),
 
   new Animal({
+    id: 'cornishRex_cat',
     type: 'cat',
     name: 'Cornish Rex',
-    id: 'CornishRex',
+    breed: 'CornishRex',
     mainImg: 'img/cats/cornishRex/cornishRex_main.png',
     size: SIZES.small,
     coat: COATS.short,
@@ -241,9 +251,10 @@ const cats = [
 
 const dogs = [
   new Animal({
+    id: 'husky_dog',
     type: 'dog',
     name: 'Husky',
-    id: 'Husky',
+    breed: 'Husky',
     mainImg: 'img/dogs/husky/husky_main.png',
     size: SIZES.large,
     coat: COATS.medium,
@@ -258,11 +269,11 @@ const dogs = [
       These are generally shaded and mixed with white markings, leading to varied wolfish markings 
       on the head and muzzle.`,
   }),
-
   new Animal({
+    id: 'pug_dog',
     type: 'dog',
     name: 'Pug',
-    id: 'Pug',
+    breed: 'Pug',
     mainImg: 'img/dogs/mops/mops_main.png',
     size: SIZES.small,
     coat: COATS.short,
@@ -278,9 +289,10 @@ const dogs = [
       the back of the skull to the tail).`,
   }),
   new Animal({
+    id: 'corgi_dog',
     type: 'dog',
     name: 'Corgi',
-    id: 'Corgi',
+    breed: 'Corgi',
     mainImg: 'img/dogs/corgi/corgi_main.png',
     size: SIZES.small,
     coat: COATS.short,
@@ -297,9 +309,10 @@ const dogs = [
       But white should never be the predominant color.`,
   }),
   new Animal({
+    id: 'jagdterrier_dog',
     type: 'dog',
     name: 'Jagdterrier',
-    id: 'Jagdterrier',
+    breed: 'Jagdterrier',
     mainImg: 'img/dogs/jagdterrier/jagdterrier_main.png',
     size: SIZES.medium,
     coat: COATS.short,
@@ -314,9 +327,10 @@ const dogs = [
       His coat is usually black and tan, but can be dark brown or grayish-black as well.`,
   }),
   new Animal({
+    id: 'labradorRetrievers_dog',
     type: 'dog',
     name: 'Labrador Retrievers',
-    id: 'Labrador',
+    breed: 'Labrador',
     mainImg: 'img/dogs/labrador/labrador_main.png',
     size: SIZES.large,
     coat: COATS.short,
@@ -332,9 +346,10 @@ const dogs = [
       Some Labradors also have white chest blazes.`,
   }),
   new Animal({
+    id: 'toyterrier_dog',
     type: 'dog',
     name: 'Toyterrier',
-    id: 'Toyterrier',
+    breed: 'Toyterrier',
     mainImg: 'img/dogs/toyterrier/toyterrier_main.png',
     size: SIZES.small,
     coat: COATS.short,
@@ -351,9 +366,10 @@ const dogs = [
       the breed standard.`,
   }),
   new Animal({
+    id: 'spitz_dog',
     type: 'dog',
     name: 'Spitz',
-    id: 'Spitz',
+    breed: 'Spitz',
     mainImg: 'img/dogs/spitz/spitz_main.png',
     size: SIZES.small,
     coat: COATS.long,
@@ -371,9 +387,10 @@ const dogs = [
 
 const rats = [
   new Animal({
+    id: 'standart_rat',
     type: 'rat',
     name: 'Standart',
-    id: 'Standart',
+    breed: 'Standart',
     mainImg: 'img/rats/standart_main.png',
     size: SIZES.small,
     coat: COATS.short,
@@ -389,9 +406,10 @@ const rats = [
       pink-eyed white, silver black, silver lilac, hooded, Dalmatian, and many more.`,
   }),
   new Animal({
+    id: 'dumbo_rat',
     type: 'rat',
     name: 'Dumbo',
-    id: 'Dumbo',
+    breed: 'Dumbo',
     mainImg: 'img/rats/dumbo_main.png',
     size: SIZES.small,
     coat: COATS.short,
@@ -407,9 +425,10 @@ const rats = [
       However, agouti dumbos can also be found in cinnamon and fawn.`,
   }),
   new Animal({
+    id: 'sphynx_rat',
     type: 'rat',
     name: 'Sphynx',
-    id: 'Sphynx',
+    breed: 'Sphynx',
     mainImg: 'img/rats/sphynx_main.png',
     size: SIZES.small,
     coat: COATS.short,
@@ -424,9 +443,10 @@ const rats = [
       or grey areas of skin.`,
   }),
   new Animal({
+    id: 'rex_rat',
     type: 'rat',
     name: 'Rex',
-    id: 'Rex',
+    breed: 'Rex',
     mainImg: 'img/rats/rex_main.png',
     size: SIZES.small,
     coat: COATS.short,
@@ -474,6 +494,10 @@ const animalsMapping = {
   },
 };
 
+function generateUniqueId() {
+  return Math.random().toString(16).slice(2);
+}
+
 
 function openAnimals(evt, animalType) {
 
@@ -503,7 +527,7 @@ function capitalize(string) {
 
 function createAnimalTemplate(animal) {
   return `
-    <div class="Breed ${animal.id}" id="${animal.id}" data-size="${animal.size}" 
+    <div class="Breed ${animal.breed}" id="${animal.breed}" data-size="${animal.size}" 
       data-coat="${animal.coat}" data-energy="${animal.energy}">
       <img class="Breed-Img" src="${animal.mainImg}"/>
       <div class="Breed-Info">
@@ -680,7 +704,7 @@ function createPopupTemplate(animal) {
   return `
     <img class="Close" src="img/icons/close.svg" onclick="handleClosePopup(popupRoot)"/>
 
-    <div class="Popup-Info" id="popup${animal.id}">
+    <div class="Popup-Info" id="popup${animal.breed}">
       <div class="Popup-Header">  
         <h1>${animal.name}</h1>
         <button class="Add"><img src="img/icons/heart.svg"/><p>Add to Favorites</p></button>
