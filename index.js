@@ -524,6 +524,7 @@ function openAnimals(evt, animalType) {
 
   document.getElementById(animalType).style.display = 'flex';
   evt.currentTarget.classList.add('active');
+  // TODO. Decide whether should be removed as already used inside clearFilter
   toggleEmptyMessage(true);
   clearFilter(animalType);
 }
@@ -548,8 +549,10 @@ function createAnimalTemplate(animal) {
     borderStyle = 'none';
   }
 
+  const classes = `Breed ${animal.breed} ${animal.isFavorite ? 'Breed_isFavorite' : ''}`;
+
   return `
-    <div class="Breed ${animal.breed}" id="${animal.breed}" data-size="${animal.size}" 
+    <div class="${classes}" id="${animal.breed}" data-size="${animal.size}" 
       data-coat="${animal.coat}" data-energy="${animal.energy}" style="border:${borderStyle}">
       <img class="FavoriteHeard" style="display:${display}" src='img/icons/favoriteForCards.svg'>
       <img class="Breed-Img" src="${animal.mainImg}"/>
@@ -734,6 +737,7 @@ function createFavoriteAddButtonTemplate(animal) {
   `;
 }
 
+
 function createFavoriteRemoveButtonTemplate(animal) {
   return `
     <button class="Remove" onclick="handleRemoveFromFavorite(event, '${animal.id}', favorites, rootFavoritesBreeds)">
@@ -742,16 +746,6 @@ function createFavoriteRemoveButtonTemplate(animal) {
     </button>
   `;
 }
-
-
-// function insertFavoriteRemoveButtonTemplate(animal, root) {
-//   root.innerHTML = createFavoriteRemoveButtonTemplate(animal);
-// }
-
-
-// function insertFavoriteAddButtonTemplate(animal, root) {
-//   root.innerHTML = createFavoriteAddButtonTemplate(animal);
-// }
 
 
 function createPopupTemplate(animal) {
@@ -843,9 +837,6 @@ function handleOpenPopup(_event, animalId, root) {
 function handleClosePopup(popup, animal) {
   popup.classList.remove('Popup_active');
   document.documentElement.style.overflowY = '';
-  insertAnimalCards(animalsMapping.cats.list, animalsMapping.cats.breedsRoot);
-  insertAnimalCards(animalsMapping.dogs.list, animalsMapping.dogs.breedsRoot);
-  insertAnimalCards(animalsMapping.rats.list, animalsMapping.rats.breedsRoot);
 }
 
 
@@ -882,14 +873,39 @@ function handleAddToFavorite(event, animalId, favorites, root) {
 
   insertPopup(animalId, popupRoot);
 
-  insertAnimalCards(favorites, root);  
+  insertAnimalCards(favorites, root);
+
+  const animalType = getAnimalTypeByAnimalId(animalId);
+  if (animalType) {
+    const { list, breedsRoot, state } = animalsMapping[animalType];
+    const filteredAnimals = filterState(state, list);
+    insertAnimalCards(filteredAnimals, breedsRoot);
+  }
+}
+
+function getAnimalTypeByAnimalId(animalId) {
+  const animal = findAnimalById(animalId);
+
+  switch (animal.type) {
+    case 'cat':
+      return ANIMAL_TYPES.cats;
+    
+    case 'dog':
+      return ANIMAL_TYPES.dogs;
+    
+    case 'rat':
+      return ANIMAL_TYPES.rats;
+    
+    default:
+      return null;
+  }
 }
 
 
 function handleRemoveFromFavorite(event, animalId, favorites, root) {
   const animalInfo = findAnimalById(animalId);
 
-  const animalForRemove = favorites.find((item) => {
+  const animalForRemove = favorites.findIndex((item) => {
     return item.id === animalId;
   });
 
@@ -897,9 +913,16 @@ function handleRemoveFromFavorite(event, animalId, favorites, root) {
 
   insertPopup(animalId, popupRoot);
   
-  favorites.splice(favorites.indexOf(animalForRemove), 1);
+  favorites.splice(animalForRemove, 1);
 
   insertAnimalCards(favorites, root);
+
+  const animalType = getAnimalTypeByAnimalId(animalId);
+  if (animalType) {
+    const { list, breedsRoot, state } = animalsMapping[animalType];
+    const filteredAnimals = filterState(state, list);
+    insertAnimalCards(filteredAnimals, breedsRoot);
+  }
 }
 
 
