@@ -29,6 +29,7 @@
         <button class="Tablinks" onclick="openAnimals(event, ANIMAL_TYPES.cats)" id="defaultOpen">Cats</button>
         <button class="Tablinks" onclick="openAnimals(event, ANIMAL_TYPES.dogs)">Dogs</button>
         <button class="Tablinks" onclick="openAnimals(event, ANIMAL_TYPES.rats)">Rats</button>
+        <button class="Tablinks" onclick="openAnimals(event, ANIMAL_TYPES.favorites)">Favorites</button>
       </div>
 
       <section class="Tabcontent Tabcontent-Cats Cats" id="cats">
@@ -69,6 +70,11 @@
         <section class="Rats-Breeds Breeds">
         </section>
       </section>
+
+      <section class="Tabcontent Tabcontent-Favorites Favorites" id="favorites">
+        <section class="Favorites-Breeds Breeds"></section>
+      </section>
+
 
       <div class="Message"> 
         <p>There is not such breed.</p> 

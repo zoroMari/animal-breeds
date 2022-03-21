@@ -23,6 +23,7 @@ const ANIMAL_TYPES = {
   cats: 'cats',
   dogs: 'dogs',
   rats: 'rats',
+  favorites: 'favorites',
 };
 
 class FilterState {
@@ -60,6 +61,7 @@ class Animal {
     characteristics,
     lifespan,
     colors,
+    isFavorite,
   }) {
     this.id = id;
     this.type = type;
@@ -72,6 +74,11 @@ class Animal {
     this.characteristics = characteristics;
     this.lifespan = lifespan;
     this.colors = colors;
+    this.isFavorite = false;
+  }
+
+  set(key, value) {
+    this[key] = value;
   }
 }
 
@@ -462,9 +469,12 @@ const rats = [
   }),
 ]
 
+const favorites = [];
+
 const rootCatBreeds = document.querySelector('.Cats .Breeds');
 const rootDogBreeds = document.querySelector('.Dogs .Breeds');
 const rootRatBreeds = document.querySelector('.Rats .Breeds');
+const rootFavoritesBreeds = document.querySelector('.Favorites .Breeds');
 
 const rootFilterCats = document.querySelector('.Cats form .Filter-Controls');
 const rootFilterDogs = document.querySelector('.Dogs form .Filter-Controls');
@@ -494,6 +504,7 @@ const animalsMapping = {
   },
 };
 
+
 function generateUniqueId() {
   return Math.random().toString(16).slice(2);
 }
@@ -513,6 +524,7 @@ function openAnimals(evt, animalType) {
 
   document.getElementById(animalType).style.display = 'flex';
   evt.currentTarget.classList.add('active');
+  // TODO. Decide whether should be removed as already used inside clearFilter
   toggleEmptyMessage(true);
   clearFilter(animalType);
 }
@@ -526,9 +538,23 @@ function capitalize(string) {
 
 
 function createAnimalTemplate(animal) {
+  let display;
+  let borderStyle;
+
+  if(animal.isFavorite) {
+    display = 'block';
+    borderStyle = '2px solid var(--color-main)';
+  } else {
+    display = 'none';
+    borderStyle = 'none';
+  }
+
+  const classes = `Breed ${animal.breed} ${animal.isFavorite ? 'Breed_isFavorite' : ''}`;
+
   return `
-    <div class="Breed ${animal.breed}" id="${animal.breed}" data-size="${animal.size}" 
-      data-coat="${animal.coat}" data-energy="${animal.energy}">
+    <div class="${classes}" id="${animal.breed}" data-size="${animal.size}" 
+      data-coat="${animal.coat}" data-energy="${animal.energy}" style="border:${borderStyle}">
+      <img class="FavoriteHeard" style="display:${display}" src='img/icons/favoriteForCards.svg'>
       <img class="Breed-Img" src="${animal.mainImg}"/>
       <div class="Breed-Info">
         <p class="Breed-Name">${animal.name}</p>
@@ -691,6 +717,8 @@ function handleOnChange(event, stateName, animalType) {
 
 
 function clearFilter(animalType) {
+  if (animalType === 'favorites') return;
+
   const { state, list, breedsRoot, filtersRoot } = animalsMapping[animalType];
   state.reset();
 
@@ -700,15 +728,42 @@ function clearFilter(animalType) {
 }
 
 
+function createFavoriteAddButtonTemplate(animal) {
+  return `
+    <button class="Add" onclick="handleAddToFavorite(event, '${animal.id}', favorites, rootFavoritesBreeds)">
+      <img src="img/icons/heart.svg"/>
+      <p>Add to Favorites</p>
+    </button>
+  `;
+}
+
+
+function createFavoriteRemoveButtonTemplate(animal) {
+  return `
+    <button class="Remove" onclick="handleRemoveFromFavorite(event, '${animal.id}', favorites, rootFavoritesBreeds)">
+      <img src="img/icons/heart_solid.svg"/>
+      <p>Remove from Favorites</p>
+    </button>
+  `;
+}
+
+
 function createPopupTemplate(animal) {
+  let button;
+
+  if(animal.isFavorite) {
+    button = createFavoriteRemoveButtonTemplate(animal);
+  } else {
+    button = createFavoriteAddButtonTemplate(animal);
+  }
+
   return `
     <img class="Close" src="img/icons/close.svg" onclick="handleClosePopup(popupRoot)"/>
 
     <div class="Popup-Info" id="popup${animal.breed}">
       <div class="Popup-Header">  
         <h1>${animal.name}</h1>
-        <button class="Add"><img src="img/icons/heart.svg"/><p>Add to Favorites</p></button>
-        <button class="Remove Button_hidden"><img src="img/icons/heart_solid.svg"/><p>Remove from Favorites</p></button>
+        <div class="Buttons">${button}</div>
       </div>
       <img class="Popup-Img" src="${animal.mainImg}"/>
 
@@ -754,14 +809,20 @@ function showPopup(popup) {
 }
 
 
-function insertPopup(animalId, root) {
-  const animal = Object
+function findAnimalById(animalId) {
+  return Object
     .values(animalsMapping) 
     .map((item) => item.list) 
     .reduce((acc, curr) => acc.concat(curr), []) 
     .find((item) => item.id === animalId);
+}
+
+
+function insertPopup(animalId, root) {
+  const animal = findAnimalById(animalId);
 
   const template = createPopupTemplate(animal);
+
   root.innerHTML = template;
     
   showPopup(root);
@@ -773,10 +834,11 @@ function handleOpenPopup(_event, animalId, root) {
 }
 
 
-function handleClosePopup(popup) {
+function handleClosePopup(popup, animal) {
   popup.classList.remove('Popup_active');
   document.documentElement.style.overflowY = '';
 }
+
 
 function isPopupOpen(popup) {
   return popup.classList.contains('Popup_active');
@@ -792,6 +854,76 @@ function handleClosePopupByEsc(event) {
 }
 
 document.addEventListener('keydown', handleClosePopupByEsc);
+
+
+function isFavoritesIncludeId(favorites, animalId) {
+  return favorites.find((item) => {
+    return item.id === animalId;
+  });
+}
+
+
+function handleAddToFavorite(event, animalId, favorites, root) {  
+  const animalInfo = findAnimalById(animalId);
+
+  if (!isFavoritesIncludeId(favorites, animalId)) {
+    favorites.push(animalInfo);
+    animalInfo.set('isFavorite', true);
+  };
+
+  insertPopup(animalId, popupRoot);
+
+  insertAnimalCards(favorites, root);
+
+  const animalType = getAnimalTypeByAnimalId(animalId);
+  if (animalType) {
+    const { list, breedsRoot, state } = animalsMapping[animalType];
+    const filteredAnimals = filterState(state, list);
+    insertAnimalCards(filteredAnimals, breedsRoot);
+  }
+}
+
+function getAnimalTypeByAnimalId(animalId) {
+  const animal = findAnimalById(animalId);
+
+  switch (animal.type) {
+    case 'cat':
+      return ANIMAL_TYPES.cats;
+    
+    case 'dog':
+      return ANIMAL_TYPES.dogs;
+    
+    case 'rat':
+      return ANIMAL_TYPES.rats;
+    
+    default:
+      return null;
+  }
+}
+
+
+function handleRemoveFromFavorite(event, animalId, favorites, root) {
+  const animalInfo = findAnimalById(animalId);
+
+  const animalForRemove = favorites.findIndex((item) => {
+    return item.id === animalId;
+  });
+
+  animalInfo.set('isFavorite', false);
+
+  insertPopup(animalId, popupRoot);
+  
+  favorites.splice(animalForRemove, 1);
+
+  insertAnimalCards(favorites, root);
+
+  const animalType = getAnimalTypeByAnimalId(animalId);
+  if (animalType) {
+    const { list, breedsRoot, state } = animalsMapping[animalType];
+    const filteredAnimals = filterState(state, list);
+    insertAnimalCards(filteredAnimals, breedsRoot);
+  }
+}
 
 
 function startFunctions() {
