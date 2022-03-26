@@ -262,6 +262,10 @@ h1 {
   margin-right: 12px;
 }
 
+.Breed_isFavorite {
+  border: 2px solid var(--color-main);
+}
+
 .FavoriteHeard {
   position: absolute;
   top: 12px;
@@ -269,6 +273,10 @@ h1 {
   width: 32px;
   height: auto;
   display: none;
+}
+
+.Breed_isFavorite .FavoriteHeard {
+  display: block;
 }
 
 .Message {
