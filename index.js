@@ -26,6 +26,8 @@ const ANIMAL_TYPES = {
   favorites: 'favorites',
 };
 
+const URL_PARAM_NAME = 'tabType';
+
 class FilterState {
   constructor({
     size = SIZES.all,
@@ -484,6 +486,11 @@ const rootFilterDogs = document.querySelector('.Dogs form .Filter-Controls');
 
 const popupRoot = document.querySelector('.Popup');
 
+const catsBreedsBtn = document.getElementById('catsBtn');
+const dogsBreedsBtn = document.getElementById('dogsBtn');
+const ratsBreedsBtn = document.getElementById('ratsBtn');
+const favoritesBreedsBtn = document.getElementById('favoritesBtn');
+
 
 const animalsMapping = {
   cats: {
@@ -492,6 +499,7 @@ const animalsMapping = {
     filterKeys: Object.keys(new FilterState()),
     breedsRoot: rootCatBreeds,
     filtersRoot: rootFilterCats,
+    tabBtn: catsBreedsBtn,
   },
   dogs: {
     list: dogs,
@@ -499,12 +507,19 @@ const animalsMapping = {
     filterKeys: Object.keys(new FilterState()),
     breedsRoot: rootDogBreeds,
     filtersRoot: rootFilterDogs,
+    tabBtn: dogsBreedsBtn,
   },
   rats: {
     list: rats,
     state: new FilterState(),
     breedsRoot: rootRatBreeds,
+    tabBtn: ratsBreedsBtn,
   },
+  favorites: {
+    list: favorites,
+    breedsRoot: rootFavoritesBreeds,
+    tabBtn: favoritesBreedsBtn,
+  }
 };
 
 
@@ -516,6 +531,18 @@ function populateAnimalCardsFromFavorites() {
       animal[key] = value;
     });
   });
+}
+
+
+function changeUrlWithoutReload(animalType) {
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+  
+  params.delete(URL_PARAM_NAME);
+  params.set(URL_PARAM_NAME, animalType);
+  
+  url.search = params;
+  window.history.replaceState(null, null, url);
 }
 
 
@@ -533,6 +560,8 @@ function openAnimals(evt, animalType) {
     link.classList.remove('active');
   }
 
+  changeUrlWithoutReload(animalType);
+  
   evt.currentTarget.classList.add('active');
   clearFilter(animalType);
 }
@@ -928,18 +957,20 @@ function handleRemoveFromFavorite(event, animalId, favorites, root) {
   }
 
   localStorage.setItem('favorites', JSON.stringify(favorites));
-
 }
 
 
 function startFunctions() {
   populateAnimalCardsFromFavorites();
 
-  document.getElementById('defaultOpen').click();
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+  const type = params.get(URL_PARAM_NAME)
 
-  insertAnimalCards(animalsMapping.cats.list, animalsMapping.cats.breedsRoot);
-  insertAnimalCards(animalsMapping.dogs.list, animalsMapping.dogs.breedsRoot);
-  insertAnimalCards(animalsMapping.rats.list, animalsMapping.rats.breedsRoot);
+  if (animalsMapping[type]) {
+    const { tabBtn } = animalsMapping[type];
+    tabBtn.click();
+  } else animalsMapping[ANIMAL_TYPES.cats].tabBtn.click();
   
   insertFilter(ANIMAL_TYPES.cats);
   insertFilter(ANIMAL_TYPES.dogs);
@@ -947,12 +978,3 @@ function startFunctions() {
 
 startFunctions();
 
-
-
-
-
-
-
-
-
-// favorites = (localStorage.getItem(JSON.parse(favorites)));
