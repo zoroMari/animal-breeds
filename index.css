@@ -263,7 +263,7 @@ h1 {
 }
 
 .Breed_isFavorite {
-  border: 2px solid var(--color-main);
+  outline: 2px solid var(--color-main);
 }
 
 .FavoriteHeard {
@@ -275,8 +275,16 @@ h1 {
   display: none;
 }
 
-.Breed_isFavorite .FavoriteHeard {
+.Breed .FavoriteHeard_border {
   display: block;
+}
+
+.Breed_isFavorite .FavoriteHeard_solid {
+  display: block;
+}
+
+.Breed_isFavorite .FavoriteHeard_border {
+  display: none;
 }
 
 .Message {
