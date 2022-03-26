@@ -296,6 +296,11 @@ h1 {
   color: var(--color-black);
 }
 
+.Favorites .Message {
+  color: var(--color-red);
+  margin: 48px auto;
+}
+
 
 .Popup {
   position: fixed;
