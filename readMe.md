@@ -15,8 +15,7 @@ This is my pet project to practice pure JS for such features:
 :heavy_check_mark: modify the URL without reloading the page, persist data via URL 
 
 :heavy_check_mark: practice to persist data with localStorage
-
-
-
+<br> 
+ 
 **And here you will also find many cute photos of cats, dogs and rats and learn about the characteristics of different breeds** :relieved:
 
