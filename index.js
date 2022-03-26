@@ -580,7 +580,10 @@ function createAnimalTemplate(animal) {
   return `
     <div class="${classes}" id="${animal.breed}" data-size="${animal.size}" 
       data-coat="${animal.coat}" data-energy="${animal.energy}">
-      <img class="FavoriteHeard" src='img/icons/favoriteForCards.svg'>
+      <img class="FavoriteHeard FavoriteHeard_solid" src='img/icons/favoriteForCards_solid.svg'
+        onclick="handleRemoveFromFavorite(event, '${animal.id}', favorites, rootFavoritesBreeds)">
+      <img class="FavoriteHeard FavoriteHeard_border" src='img/icons/favoriteForCards_border.svg'
+        onclick="handleAddToFavorite(event, '${animal.id}', favorites, rootFavoritesBreeds)">
       <img class="Breed-Img" src="${animal.mainImg}"/>
       <div class="Breed-Info">
         <p class="Breed-Name">${animal.name}</p>
@@ -760,7 +763,7 @@ function clearFilter(animalType) {
 
 function createFavoriteAddButtonTemplate(animal) {
   return `
-    <button class="Add" onclick="handleAddToFavorite(event, '${animal.id}', favorites, rootFavoritesBreeds)">
+    <button class="Add" onclick="handleAddToFavoriteByPopup(event, '${animal.id}', favorites, rootFavoritesBreeds)">
       <img src="img/icons/heart.svg"/>
       <p>Add to Favorites</p>
     </button>
@@ -770,7 +773,7 @@ function createFavoriteAddButtonTemplate(animal) {
 
 function createFavoriteRemoveButtonTemplate(animal) {
   return `
-    <button class="Remove" onclick="handleRemoveFromFavorite(event, '${animal.id}', favorites, rootFavoritesBreeds)">
+    <button class="Remove" onclick="handleRemoveFromFavoriteByPopup(event, '${animal.id}', favorites, rootFavoritesBreeds)">
       <img src="img/icons/heart_solid.svg"/>
       <p>Remove from Favorites</p>
     </button>
@@ -894,29 +897,6 @@ function isFavoritesIncludeId(favorites, animalId) {
 }
 
 
-function handleAddToFavorite(event, animalId, favorites, root) {  
-  const animalInfo = findAnimalById(animalId);
-
-  if (!isFavoritesIncludeId(favorites, animalId)) {
-    favorites.push(animalInfo);
-    animalInfo.set('isFavorite', true);
-  };
-
-  insertPopup(animalId, popupRoot);
-
-  insertAnimalCards(favorites, root);
-
-  const animalType = getAnimalTypeByAnimalId(animalId);
-  if (animalType) {
-    const { list, breedsRoot, state } = animalsMapping[animalType];
-    const filteredAnimals = filterState(state, list);
-    insertAnimalCards(filteredAnimals, breedsRoot);
-  }
-
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-}
-
-
 function getAnimalTypeByAnimalId(animalId) {
   const animal = findAnimalById(animalId);
 
@@ -936,6 +916,34 @@ function getAnimalTypeByAnimalId(animalId) {
 }
 
 
+function handleAddToFavorite(event, animalId, favorites, root) {  
+  const animalInfo = findAnimalById(animalId);
+
+  if (!isFavoritesIncludeId(favorites, animalId)) {
+    favorites.push(animalInfo);
+    animalInfo.set('isFavorite', true);
+  };
+
+  insertAnimalCards(favorites, root);
+
+  const animalType = getAnimalTypeByAnimalId(animalId);
+  if (animalType) {
+    const { list, breedsRoot, state } = animalsMapping[animalType];
+    const filteredAnimals = filterState(state, list);
+    insertAnimalCards(filteredAnimals, breedsRoot);
+  }
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+
+function handleAddToFavoriteByPopup(event, animalId, favorites, root) {  
+  handleAddToFavorite(event, animalId, favorites, root);
+
+  insertPopup(animalId, popupRoot);
+}
+
+
 function handleRemoveFromFavorite(event, animalId, favorites, root) {
   const animalInfo = findAnimalById(animalId);
 
@@ -944,8 +952,6 @@ function handleRemoveFromFavorite(event, animalId, favorites, root) {
   });
 
   animalInfo.set('isFavorite', false);
-
-  insertPopup(animalId, popupRoot);
   
   favorites.splice(animalForRemove, 1);
 
@@ -959,6 +965,13 @@ function handleRemoveFromFavorite(event, animalId, favorites, root) {
   }
 
   localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+
+function handleRemoveFromFavoriteByPopup(event, animalId, favorites, root) {
+  handleRemoveFromFavorite(event, animalId, favorites, root)
+
+  insertPopup(animalId, popupRoot);
 }
 
 
