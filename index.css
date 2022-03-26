@@ -273,6 +273,11 @@ h1 {
   width: 32px;
   height: auto;
   display: none;
+  cursor: pointer;
+}
+
+.Breed .FavoriteHeard_border {
+  display: block;
 }
 
 .Breed .FavoriteHeard_border {
@@ -386,6 +391,7 @@ h1 {
 }
 
 .Popup-Img {
+  max-width: 100%;
   width: 558px;
   height: auto;
   margin: 48px auto;

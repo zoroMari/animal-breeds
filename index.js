@@ -838,7 +838,7 @@ function createPopupTemplate(animal) {
 
 function showPopup(popup) {
   popup.classList.add('Popup_active');
-  document.documentElement.style.overflowY = 'hidden';
+  document.body.style.overflowY = 'hidden';
 }
 
 
@@ -857,7 +857,9 @@ function insertPopup(animalId, root) {
   const template = createPopupTemplate(animal);
 
   root.innerHTML = template;
-    
+  
+  root.addEventListener('click', handleClosePopupByRoot);
+
   showPopup(root);
 }
 
@@ -869,8 +871,7 @@ function handleOpenPopup(_event, animalId, root) {
 
 function handleClosePopup(popup, animal) {
   popup.classList.remove('Popup_active');
-  document.documentElement.style.overflowY = '';
-  showEmptyMessage(favorites, message);
+  document.body.style.overflowY = '';
 }
 
 
@@ -886,6 +887,15 @@ function handleClosePopupByEsc(event) {
     handleClosePopup(popupRoot);
   }
 }
+
+
+function handleClosePopupByRoot(event) {
+  if (!isPopupOpen(popupRoot)) return;
+
+  if (event.target.closest('.Popup-Info')) return;
+  handleClosePopup(popupRoot);
+}
+
 
 document.addEventListener('keydown', handleClosePopupByEsc);
 
@@ -964,6 +974,8 @@ function handleRemoveFromFavorite(event, animalId, favorites, root) {
     insertAnimalCards(filteredAnimals, breedsRoot);
   }
 
+
+  showEmptyMessage(favorites, message);
   localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
