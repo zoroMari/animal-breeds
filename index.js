@@ -48,12 +48,6 @@ class FilterState {
   }
 }
 
-const test = { };
-setTimeout(() => {
-  test.asd = 1;
-  console.log(test);
-}, 2000);
-
 class Animal {
   constructor({
     id,
