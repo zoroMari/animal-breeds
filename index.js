@@ -469,7 +469,9 @@ const rats = [
   }),
 ]
 
-const favorites = JSON.parse(localStorage.getItem('favorites'));
+const favorites = localStorage.getItem('favorites')
+  ? JSON.parse(localStorage.getItem('favorites'))
+  : [];
 
 
 const rootCatBreeds = document.querySelector('.Cats .Breeds');
