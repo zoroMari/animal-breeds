@@ -48,6 +48,12 @@ class FilterState {
   }
 }
 
+const test = { };
+setTimeout(() => {
+  test.asd = 1;
+  console.log(test);
+}, 2000);
+
 class Animal {
   constructor({
     id,
@@ -469,7 +475,8 @@ const rats = [
   }),
 ]
 
-const favorites = [];
+const favorites = JSON.parse(localStorage.getItem('favorites'));
+
 
 const rootCatBreeds = document.querySelector('.Cats .Breeds');
 const rootDogBreeds = document.querySelector('.Dogs .Breeds');
@@ -505,16 +512,24 @@ const animalsMapping = {
 };
 
 
-function generateUniqueId() {
-  return Math.random().toString(16).slice(2);
+function populateAnimalCardsFromFavorites() {
+  favorites.forEach((item) => {
+    const animal = findAnimalById(item.id);
+    
+    Object.entries(item).forEach(([key, value]) => {
+      animal[key] = value;
+    });
+  });
 }
 
 
 function openAnimals(evt, animalType) {
 
-  const tabcontent = document.querySelectorAll('.Tabcontent');
-  for (let animal of tabcontent) {
-    animal.style.display = 'none';
+  const tabs = document.querySelectorAll('.Tabcontent');
+
+  for (let animalTab of tabs) {
+    if (animalTab.id === animalType) animalTab.style.display = 'flex';
+    else animalTab.style.display = 'none';
   }
 
   const tablinks = document.querySelectorAll('.Tablinks');
@@ -522,14 +537,9 @@ function openAnimals(evt, animalType) {
     link.classList.remove('active');
   }
 
-  document.getElementById(animalType).style.display = 'flex';
   evt.currentTarget.classList.add('active');
-  // TODO. Decide whether should be removed as already used inside clearFilter
-  toggleEmptyMessage(true);
   clearFilter(animalType);
 }
-
-document.getElementById('defaultOpen').click();
 
 
 function capitalize(string) {
@@ -538,23 +548,12 @@ function capitalize(string) {
 
 
 function createAnimalTemplate(animal) {
-  let display;
-  let borderStyle;
-
-  if(animal.isFavorite) {
-    display = 'block';
-    borderStyle = '2px solid var(--color-main)';
-  } else {
-    display = 'none';
-    borderStyle = 'none';
-  }
-
   const classes = `Breed ${animal.breed} ${animal.isFavorite ? 'Breed_isFavorite' : ''}`;
 
   return `
     <div class="${classes}" id="${animal.breed}" data-size="${animal.size}" 
-      data-coat="${animal.coat}" data-energy="${animal.energy}" style="border:${borderStyle}">
-      <img class="FavoriteHeard" style="display:${display}" src='img/icons/favoriteForCards.svg'>
+      data-coat="${animal.coat}" data-energy="${animal.energy}">
+      <img class="FavoriteHeard" src='img/icons/favoriteForCards.svg'>
       <img class="Breed-Img" src="${animal.mainImg}"/>
       <div class="Breed-Info">
         <p class="Breed-Name">${animal.name}</p>
@@ -717,7 +716,11 @@ function handleOnChange(event, stateName, animalType) {
 
 
 function clearFilter(animalType) {
-  if (animalType === 'favorites') return;
+  // if (animalType === 'favorites') return;
+  if (animalType === 'favorites') {
+    insertAnimalCards(favorites, rootFavoritesBreeds);
+    return;
+  }
 
   const { state, list, breedsRoot, filtersRoot } = animalsMapping[animalType];
   state.reset();
@@ -881,7 +884,11 @@ function handleAddToFavorite(event, animalId, favorites, root) {
     const filteredAnimals = filterState(state, list);
     insertAnimalCards(filteredAnimals, breedsRoot);
   }
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+
 }
+
 
 function getAnimalTypeByAnimalId(animalId) {
   const animal = findAnimalById(animalId);
@@ -923,10 +930,17 @@ function handleRemoveFromFavorite(event, animalId, favorites, root) {
     const filteredAnimals = filterState(state, list);
     insertAnimalCards(filteredAnimals, breedsRoot);
   }
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+
 }
 
 
 function startFunctions() {
+  populateAnimalCardsFromFavorites();
+
+  document.getElementById('defaultOpen').click();
+
   insertAnimalCards(animalsMapping.cats.list, animalsMapping.cats.breedsRoot);
   insertAnimalCards(animalsMapping.dogs.list, animalsMapping.dogs.breedsRoot);
   insertAnimalCards(animalsMapping.rats.list, animalsMapping.rats.breedsRoot);
@@ -936,3 +950,13 @@ function startFunctions() {
 }
 
 startFunctions();
+
+
+
+
+
+
+
+
+
+// favorites = (localStorage.getItem(JSON.parse(favorites)));
