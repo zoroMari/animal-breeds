@@ -491,6 +491,7 @@ const dogsBreedsBtn = document.getElementById('dogsBtn');
 const ratsBreedsBtn = document.getElementById('ratsBtn');
 const favoritesBreedsBtn = document.getElementById('favoritesBtn');
 
+const message = document.querySelector('.Favorites .Message-Favorites'); 
 
 const animalsMapping = {
   cats: {
@@ -564,6 +565,7 @@ function openAnimals(evt, animalType) {
   
   evt.currentTarget.classList.add('active');
   clearFilter(animalType);
+  showEmptyMessage(favorites, message);
 }
 
 
@@ -723,7 +725,7 @@ function filterState(state, animals) {
 
 function toggleEmptyMessage(shouldHide) {
   const displayState = shouldHide ? 'none' : 'flex';
-  document.querySelector('.Message').style.display = displayState;
+  document.querySelector('.Message-Breeds').style.display = displayState;
 }
 
 
@@ -865,6 +867,7 @@ function handleOpenPopup(_event, animalId, root) {
 function handleClosePopup(popup, animal) {
   popup.classList.remove('Popup_active');
   document.documentElement.style.overflowY = '';
+  showEmptyMessage(favorites, message);
 }
 
 
@@ -911,7 +914,6 @@ function handleAddToFavorite(event, animalId, favorites, root) {
   }
 
   localStorage.setItem('favorites', JSON.stringify(favorites));
-
 }
 
 
@@ -960,8 +962,15 @@ function handleRemoveFromFavorite(event, animalId, favorites, root) {
 }
 
 
+function showEmptyMessage(favorites, message) {
+  message.style.display = favorites.length ? 'none' : 'flex';
+}
+
+
 function startFunctions() {
   populateAnimalCardsFromFavorites();
+ 
+  showEmptyMessage(favorites, message);
 
   const url = new URL(window.location.href);
   const params = new URLSearchParams(url.search);
