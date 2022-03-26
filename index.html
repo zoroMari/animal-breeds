@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="animals, cats, dogs">
+    <title>Animal breeds</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" type="image/x-icon" href="img/icons/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" 
+      rel="stylesheet">
+  </head>
+
+  <body>
+    <header class="Header">
+      <div class="Logo">
+        <img src="img/icons/paw.svg">
+        <p>Pet breeds</p>
+      </div>
+      <p>by zoroMari</p>
+    </header>
+
+    <main class="Main">
+      <h1>Most popular breeds of our pets</h1>
+
+      <div class="Tabs">
+        <button class="Tablinks" onclick="openAnimals(event, ANIMAL_TYPES.cats)" id="catsBtn">Cats</button>
+        <button class="Tablinks" onclick="openAnimals(event, ANIMAL_TYPES.dogs)" id="dogsBtn">Dogs</button>
+        <button class="Tablinks" onclick="openAnimals(event, ANIMAL_TYPES.rats)" id="ratsBtn">Rats</button>
+        <button class="Tablinks" onclick="openAnimals(event, ANIMAL_TYPES.favorites)" id="favoritesBtn">Favorites</button>
+      </div>
+
+      <section class="Tabcontent Tabcontent-Cats Cats" id="cats">
+        <p class="Text Cats-Text"> 
+          Thinking about getting a cat but not sure which breed is right for you? We can help.
+        </p>
+
+        <form class="Filter Cats-Filter" name="filterCat" onsubmit="event.preventDefault()">
+          <div class="Filter-Controls"></div>
+          <button class="Clear" onclick="clearFilter(ANIMAL_TYPES.cats)">Clear filter</button>
+        </form>
+
+        <section class="Cats-Breeds Breeds">
+        </section>
+      </section>
+
+
+      <section class="Tabcontent Tabcontent-Dogs Dogs" id="dogs">
+        <p class="Text Dogs-Text"> 
+          Thinking about getting a dog but not sure which breed is right for you? We can help.
+        </p>
+
+        <form class="Filter Dogs-Filter" name="filterDog" onsubmit="event.preventDefault()">
+          <div class="Filter-Controls"></div>
+          <button class="Clear" onclick="clearFilter(ANIMAL_TYPES.dogs)">Clear filter</button>
+        </form>
+
+        <section class="Dogs-Breeds Breeds">
+        </section>
+      </section>
+
+
+      <section class="Tabcontent Tabcontent-Rats Rats" id="rats">
+        <p class="Text Rats-Text"> 
+          Thinking about getting a rat but not sure which breed is right for you? We can help.
+        </p>
+
+        <section class="Rats-Breeds Breeds">
+        </section>
+      </section>
+
+      <section class="Tabcontent Tabcontent-Favorites Favorites" id="favorites">
+        <div class="Message Message-Favorites"> 
+          <p>No favorite breeds yet.</p> 
+        </div>
+        <section class="Favorites-Breeds Breeds"></section>
+      </section>
+
+
+      <div class="Message Message-Breeds"> 
+        <p>There is not such breed.</p> 
+        <p> Please, change filter conditions.</p>
+      </div>
+      
+      <section class="Popup"></section>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>
