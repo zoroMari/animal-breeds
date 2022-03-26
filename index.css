@@ -280,6 +280,10 @@ h1 {
   display: block;
 }
 
+.Breed .FavoriteHeard_border {
+  display: block;
+}
+
 .Breed_isFavorite .FavoriteHeard_solid {
   display: block;
 }
